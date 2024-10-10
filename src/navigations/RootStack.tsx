@@ -5,26 +5,51 @@ import { RootStackParams } from "./RootStackParams";
 import { AuthStackGroup } from "./AuthStackGroup";
 import { Routes } from "./Routes";
 import BottomTab from "./BottomTab";
+import {
+  Comfortaa_300Light,
+  Comfortaa_400Regular,
+  Comfortaa_500Medium,
+  Comfortaa_600SemiBold,
+  Comfortaa_700Bold,
+  useFonts,
+} from "@expo-google-fonts/comfortaa";
 
 SplashScreen.preventAutoHideAsync();
 
 const RootStack = () => {
   const Stack = createNativeStackNavigator<RootStackParams>();
+  const [loaded, error] = useFonts({
+    Comfortaa_300Light,
+    Comfortaa_400Regular,
+    Comfortaa_500Medium,
+    Comfortaa_600SemiBold,
+    Comfortaa_700Bold,
+  });
+
+  //   useEffect(() => {
+  //     async function prepare() {
+  //       try {
+  //         // preload methodlar burada çağırılıyor
+  //       } catch (e) {
+  //         console.warn(e);
+  //       } finally {
+  //         // Auth durumu kontrol edildiğinde splash screen kaldırılacak
+  //         await SplashScreen.hideAsync();
+  //       }
+  //     }
+
+  //     prepare();
+  //   }, [loaded]);
 
   useEffect(() => {
-    async function prepare() {
-      try {
-        // preload methodlar burada çağırılıyor
-      } catch (e) {
-        console.warn(e);
-      } finally {
-        // Auth durumu kontrol edildiğinde splash screen kaldırılacak
-        await SplashScreen.hideAsync();
-      }
+    if (loaded || error) {
+      SplashScreen.hideAsync();
     }
+  }, [loaded, error]);
 
-    prepare();
-  }, []);
+  if (!loaded && !error) {
+    return null;
+  }
 
   return (
     <Stack.Navigator

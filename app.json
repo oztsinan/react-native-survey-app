@@ -23,6 +23,20 @@
     "web": {
       "bundler": "metro",
       "favicon": "./src/assets/favicon.png"
-    }
+    },
+    "plugins": [
+      [
+        "expo-font",
+        {
+          "fonts": [
+            "node_modules/@expo-google-fonts/comfortaa/Comfortaa_300Light.ttf",
+            "node_modules/@expo-google-fonts/comfortaa/Comfortaa_400Regular.ttf",
+            "node_modules/@expo-google-fonts/comfortaa/Comfortaa_500Medium.ttf",
+            "node_modules/@expo-google-fonts/comfortaa/Comfortaa_600SemiBold.ttf",
+            "node_modules/@expo-google-fonts/comfortaa/Comfortaa_700Bold.ttf"
+          ]
+        }
+      ]
+    ]
   }
 }

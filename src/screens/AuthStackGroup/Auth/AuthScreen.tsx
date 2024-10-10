@@ -1,4 +1,5 @@
 import { ThemedText } from "@/components/ThemedText";
+import { Assets } from "@/constants/Assets";
 import { BlurView } from "expo-blur";
 import { Image } from "expo-image";
 import { StyleSheet, View } from "react-native";
@@ -8,7 +9,7 @@ export const AuthScreen = () => {
     <View className="flex-1 justify-end">
       <Image
         style={styles.image}
-        source={require("@/assets/images/background.png")}
+        source={Assets.images.background}
         contentFit="cover"
         transition={500}
       />

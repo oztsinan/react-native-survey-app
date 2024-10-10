@@ -5,11 +5,24 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: "var(--primary)",
+        primary: {
+          DEFAULT: "var(--primary)",
+          foreground: "var(--primary-foreground)",
+          muted: "var(--primary-muted)",
+        },
         foreground: "var(--foreground)",
         background: "var(--background)",
-        secondaryBackground: "var(--secondaryBackground)",
+        muted: "var(--muted)",
         border: "var(--border)",
+      },
+      fontFamily: {
+        comfortaa: ["Comfortaa"],
+      },
+      padding: {
+        page: 20,
+      },
+      gap: {
+        page: 20,
       },
     },
   },

@@ -22,6 +22,7 @@ export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
           colors: {
             ...RNDarkTheme.colors,
             primary: DarkTheme.primary,
+            background: DarkTheme.background,
           },
         }
       : {
@@ -29,6 +30,7 @@ export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
           colors: {
             ...DefaultTheme.colors,
             primary: LightTheme.primary,
+            background: LightTheme.background,
           },
         };
 
