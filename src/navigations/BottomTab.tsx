@@ -18,7 +18,6 @@ const BottomTab = () => {
   const Tab = createBottomTabNavigator<BottomTabParams>();
   const { bottom } = useSafeAreaInsets();
   const { colorScheme } = useColorScheme();
-  const { colors } = useTheme();
 
   const screenWidth = Dimensions.get("window").width;
   const bottomTabBackgroundColor =
@@ -44,7 +43,7 @@ const BottomTab = () => {
           height: 50,
           margin: "auto",
         },
-        tabBarActiveTintColor: colors?.["primary-muted"],
+        tabBarActiveTintColor: "#9593FF",
         tabBarInactiveTintColor: "white",
       }}
     >
@@ -80,7 +79,7 @@ const BottomTab = () => {
             <MaterialCommunityIcons
               name="account"
               size={25}
-              color={focused ? colors["primary-muted"] : "white"}
+              color={focused ? "#9593FF" : "white"}
             />
           ),
         }}

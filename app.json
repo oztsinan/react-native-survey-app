@@ -36,7 +36,8 @@
             "node_modules/@expo-google-fonts/comfortaa/Comfortaa_700Bold.ttf"
           ]
         }
-      ]
+      ],
+      "expo-localization"
     ]
   }
 }

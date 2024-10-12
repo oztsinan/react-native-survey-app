@@ -1,5 +1,5 @@
 import { View } from "react-native";
-import { ThemedText } from "./ThemedText";
+import { ThemedText } from "../Themed/ThemedText";
 import { useTheme } from "@/hook/useTheme";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 

@@ -2,7 +2,6 @@ import { useEffect } from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import * as SplashScreen from "expo-splash-screen";
 import { RootStackParams } from "./RootStackParams";
-import { AuthStackGroup } from "./AuthStackGroup";
 import { Routes } from "./Routes";
 import BottomTab from "./BottomTab";
 import {
@@ -11,45 +10,60 @@ import {
   Comfortaa_500Medium,
   Comfortaa_600SemiBold,
   Comfortaa_700Bold,
-  useFonts,
 } from "@expo-google-fonts/comfortaa";
+import { loadAsync } from "expo-font";
+import { SurveyScreen } from "@/screens/Survey/SurveyScreen";
+import { AuthScreen } from "@/screens/Auth/AuthScreen";
+import { useAuthStore } from "@/store/AuthStore";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { StorageKeys } from "@/constants/StorageKeys";
+import { queryClient } from "@/providers/QueryProvider";
+import { getAuthMeQueryConfig } from "@/api/Auth";
 
 SplashScreen.preventAutoHideAsync();
 
 const RootStack = () => {
   const Stack = createNativeStackNavigator<RootStackParams>();
-  const [loaded, error] = useFonts({
-    Comfortaa_300Light,
-    Comfortaa_400Regular,
-    Comfortaa_500Medium,
-    Comfortaa_600SemiBold,
-    Comfortaa_700Bold,
-  });
+  const { user, setUser } = useAuthStore();
 
-  //   useEffect(() => {
-  //     async function prepare() {
-  //       try {
-  //         // preload methodlar burada çağırılıyor
-  //       } catch (e) {
-  //         console.warn(e);
-  //       } finally {
-  //         // Auth durumu kontrol edildiğinde splash screen kaldırılacak
-  //         await SplashScreen.hideAsync();
-  //       }
-  //     }
+  const onFontLoad = async () => {
+    await loadAsync({
+      Comfortaa_300Light,
+      Comfortaa_400Regular,
+      Comfortaa_500Medium,
+      Comfortaa_600SemiBold,
+      Comfortaa_700Bold,
+    });
+  };
 
-  //     prepare();
-  //   }, [loaded]);
+  const onAuthStateChanged = async () => {
+    // auth durumunu kontrol et
+    const accessToken = await AsyncStorage.getItem(StorageKeys.ACCESS_TOKEN);
+
+    if (accessToken) {
+      const user = await queryClient.fetchQuery(getAuthMeQueryConfig);
+      setUser(user);
+    }
+  };
 
   useEffect(() => {
-    if (loaded || error) {
-      SplashScreen.hideAsync();
+    async function prepare() {
+      try {
+        // preload methodlar burada çağırılıyor
+        await onFontLoad();
+        await onAuthStateChanged();
+      } catch (e) {
+        console.warn(e);
+      } finally {
+        setTimeout(async () => {
+          await SplashScreen.hideAsync();
+          // preload işlemi bittikten sonra splash screen kapatılıyor
+        }, 700); // animasyon geçişi gözükmemesi için 700ms bekletildi
+      }
     }
-  }, [loaded, error]);
 
-  if (!loaded && !error) {
-    return null;
-  }
+    prepare();
+  }, []);
 
   return (
     <Stack.Navigator
@@ -57,8 +71,9 @@ const RootStack = () => {
         headerShown: false,
       }}
     >
-      <Stack.Screen name={Routes.BOTTOM_TAB} component={BottomTab} />
-      {AuthStackGroup()}
+      {!user && <Stack.Screen name={Routes.AUTH} component={AuthScreen} />}
+      {user && <Stack.Screen name={Routes.BOTTOM_TAB} component={BottomTab} />}
+      <Stack.Screen name={Routes.SURVEY} component={SurveyScreen} />
     </Stack.Navigator>
   );
 };

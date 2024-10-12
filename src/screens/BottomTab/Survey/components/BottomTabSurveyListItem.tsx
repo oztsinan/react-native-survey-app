@@ -1,20 +1,46 @@
-import { ListItem } from "@/components/ListItem";
-import { ThemedText } from "@/components/ThemedText";
+import { ListItem } from "@/components/List/ListItem";
+import { ThemedText } from "@/components/Themed/ThemedText";
 import { View } from "react-native";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { useTheme } from "@/hook/useTheme";
+import { SurveyDTO } from "@/api/Survey";
+import { useTypedNavigation } from "@/hook/useTypedNavigation";
+import { RootStackParams } from "@/navigations/RootStackParams";
+import { Routes } from "@/navigations/Routes";
+import { useSurveyStore } from "@/store/SurveyStore";
 
-export const BottomTabSurveyListItem = () => {
+type BottomTabSurveyListItemProps = {
+  item?: SurveyDTO;
+};
+
+export const BottomTabSurveyListItem = ({
+  item,
+}: BottomTabSurveyListItemProps) => {
+  const navigation = useTypedNavigation<RootStackParams>();
   const { colors } = useTheme();
+  const { setSurvey } = useSurveyStore();
+
+  const onDetailPress = async () => {
+    await setSurvey(item?.id!);
+    useSurveyStore.persist.setOptions({ // zustand store'u persist etmek için survey id'sine göre yeni isim oluşturmak
+      name: `survey-store-${item?.id}`,
+    });
+
+    useSurveyStore.persist.rehydrate(); // zustand store'u yeni isim kullanarak yeniden canlandırmak (rehydrate etmek)
+
+    navigation.navigate(Routes.SURVEY, {
+      id: item?.id!,
+    });
+  };
 
   return (
     <ListItem
-      onPress={() => {}}
+      onPress={onDetailPress}
       className="flex-row items-center justify-between gap-2"
     >
       <View className="gap-1.5 flex-1">
         <ThemedText numberOfLines={1} className="text-primary text-sm">
-          Anket
+          {item?.name}
         </ThemedText>
         <DateTimeInformation />
       </View>

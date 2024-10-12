@@ -1,12 +1,12 @@
-import { ListItem } from "@/components/ListItem";
-import { ThemedText } from "@/components/ThemedText";
+import { ListItem } from "@/components/List/ListItem";
+import { ThemedText } from "@/components/Themed/ThemedText";
 import { View } from "react-native";
 import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 import { useTheme } from "@/hook/useTheme";
 
 type BottomTabProfileEditListItemProps = {
   title: string;
-  value: string;
+  value: string | undefined;
 };
 
 export const BottomTabProfileEditListItem = ({

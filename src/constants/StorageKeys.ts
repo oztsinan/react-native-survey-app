@@ -1,6 +1,7 @@
 //AsyncStorage key değerlerini tutan enum
 
 export enum StorageKeys {
-  TOKEN = "TOKEN",
+  ACCESS_TOKEN = "ACCESS_TOKEN",
+  REFRESH_TOKEN = "REFRESH_TOKEN",
   THEME = "THEME",
 }

@@ -1,4 +1,4 @@
-import { ThemedText } from "@/components/ThemedText";
+import { ThemedText } from "@/components/Themed/ThemedText";
 import { View } from "react-native";
 
 export const BottomTabSurveyStatistics = () => {

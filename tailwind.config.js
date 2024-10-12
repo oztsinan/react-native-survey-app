@@ -8,12 +8,15 @@ module.exports = {
         primary: {
           DEFAULT: "var(--primary)",
           foreground: "var(--primary-foreground)",
-          muted: "var(--primary-muted)",
         },
         foreground: "var(--foreground)",
         background: "var(--background)",
         muted: "var(--muted)",
         border: "var(--border)",
+        destructive: {
+          DEFAULT: "var(--destructive)",
+          foreground: "var(--destructive-foreground)",
+        },
       },
       fontFamily: {
         comfortaa: ["Comfortaa"],
