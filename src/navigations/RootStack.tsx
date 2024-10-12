@@ -19,6 +19,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { StorageKeys } from "@/constants/StorageKeys";
 import { queryClient } from "@/providers/QueryProvider";
 import { getAuthMeQueryConfig } from "@/api/Auth";
+import { SurveyResultScreen } from "@/screens/SurveyResult/SurveyResultScreen";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -74,6 +75,16 @@ const RootStack = () => {
       {!user && <Stack.Screen name={Routes.AUTH} component={AuthScreen} />}
       {user && <Stack.Screen name={Routes.BOTTOM_TAB} component={BottomTab} />}
       <Stack.Screen name={Routes.SURVEY} component={SurveyScreen} />
+      <Stack.Screen
+        name={Routes.SURVEY_RESULT}
+        component={SurveyResultScreen}
+        options={({ route }) => ({
+          title: "Anket Sonucu",
+          headerShown: true,
+          headerLargeTitle: true,
+          presentation: "modal",
+        })}
+      />
     </Stack.Navigator>
   );
 };

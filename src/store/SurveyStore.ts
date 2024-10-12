@@ -11,8 +11,7 @@ interface SurveyStore {
   activeQuestionIndex: number; // aktif soruyu tutmak için
   remainingTime: number; // geri sayımı tutmak için
   intervalId: NodeJS.Timeout | null; // geri sayımı tutmak için
-  isCompleted: boolean; // anketin tamamlanıp tamamlanmadığını tutmak için
-  setIsCompleted: (isCompleted: boolean) => void; // anketin tamamlanıp tamamlanmadığını setlemek için
+  completedDate: string | undefined; // anketin tamamlanıp tamamlanmadığını tutmak için
   setSurvey: (id: string) => Promise<void>; // anketi setlemek için
   start: () => void; // geri sayımı başlat
   stop: () => void; // geri sayımı durdur
@@ -35,30 +34,22 @@ export const useSurveyStore = create<SurveyStore>()(
       activeQuestionIndex: 0, // başlangıçta ilk soru
       remainingTime: undefined as any, // başlangıçta süre yok
       intervalId: null, // başlangıçta interval yok
-      isCompleted: false, // başlangıçta anket tamamlanmamış
-      setIsCompleted: (isCompleted: boolean) => {
-        if (isCompleted) {
-          set({ isCompleted });
-          get().stop();
-        } else {
-          set({ isCompleted });
-        }
-      },
+      completedDate: undefined, // başlangıçta anket tamamlanmamış
       setSurvey: async (id: string) => {
         const survey = await queryClient.fetchQuery(
           getSurveyByIdQueryConfig(id)
         );
-
         const remainingTime = survey?.duration || 0;
+
         set(() => ({
           survey,
           remainingTime: get().remainingTime ?? remainingTime,
         }));
       }, // anketi setle
       start: () => {
-        const { isCompleted } = get();
+        const { completedDate } = get();
 
-        if (isCompleted) {
+        if (completedDate) {
           return;
         }
 
@@ -89,7 +80,7 @@ export const useSurveyStore = create<SurveyStore>()(
           activeQuestionIndex: 0,
           remainingTime: undefined,
           intervalId: null,
-          isCompleted: false,
+          completedDate: undefined,
           answers: {},
         });
         get().setSurvey(surveyId);
@@ -114,67 +105,64 @@ export const useSurveyStore = create<SurveyStore>()(
         }
       }, // bir önceki soruya geç
       onNextQuestion: () => {
-        const { activeQuestionIndex, survey } = get();
+        const { activeQuestionIndex, survey, answers, remainingTime } = get();
+        const currentQuestionId = survey?.questions[activeQuestionIndex]?.id;
         const nextIndex = activeQuestionIndex + 1;
+        const isLastQuestion = nextIndex === survey?.questions.length;
 
-        if (survey && nextIndex < survey.questions.length) {
-          set((state) => {
-            state.questionsListRef.current?.scrollToIndex({
-              index: nextIndex,
-              animated: true,
-            });
+        if (currentQuestionId) {
+          // 1. toplam geçen süreyi hesapla
+          const totalElapsedTime = survey.duration - remainingTime;
 
-            return { activeQuestionIndex: nextIndex };
-          });
+          // 2. önceki soruların tamamlanma sürelerinin toplamını hesapla
+          const previousCompletionTimes = Object.values(answers).reduce(
+            (total, answer) => {
+              return total + (answer.completionTime || 0);
+            },
+            0
+          );
+
+          // 3. mevcut sorunun 'completionTime' değerini hesapla
+          const completionTime = totalElapsedTime - previousCompletionTimes;
+
+          set((state) => ({
+            answers: {
+              ...state.answers,
+              [currentQuestionId]: {
+                ...state.answers[currentQuestionId],
+                completionTime,
+              },
+            },
+          }));
         }
-      }, // bir sonraki soruya geç
+
+        if (!isLastQuestion) {
+          set({ activeQuestionIndex: nextIndex });
+          get().questionsListRef.current?.scrollToIndex({
+            index: nextIndex,
+            animated: true,
+          });
+        } else {
+          // Anket tamamlandı
+          set({ completedDate: new Date().toISOString() });
+          get().stop();
+        }
+      },
+
+      // bir sonraki soruya geç
 
       // Question Answer states
       answers: {}, // başlangıçta cevap yok
       setAnswer: (questionId: string, answer: number | string) => {
-        const { survey, remainingTime, activeQuestionIndex, answers } = get();
-
-        if (!survey || activeQuestionIndex === 0) {
-          // İlk sorudayken tamamlanma süresi, toplam süreden kalan süreyi çıkarmaktır
-          const completionTime = survey?.duration! - remainingTime;
-
-          set((state) => ({
-            answers: {
-              ...state.answers,
-              [questionId]: {
-                value: answer,
-                completionTime,
-              },
+        set((state) => ({
+          answers: {
+            ...state.answers,
+            [questionId]: {
+              value: answer,
+              completionTime: undefined as any,
             },
-          }));
-        } else {
-          // önceki sorunun tamamlandığı süreyi hesapla
-          const prevQuestionId = survey.questions[activeQuestionIndex - 1].id;
-          const previousCompletionTime =
-            answers[prevQuestionId]?.completionTime || 0;
-
-          // yeni sorunun tamamlanma süresini önceki sorudan kalan süreyi çıkar
-          const completionTime =
-            survey.duration - remainingTime - previousCompletionTime;
-
-          set((state) => ({
-            answers: {
-              ...state.answers,
-              [questionId]: {
-                value: answer,
-                completionTime,
-              },
-            },
-          }));
-        }
-
-        const surveyQuestionLength = survey?.questions?.length!;
-        if (activeQuestionIndex === surveyQuestionLength - 1) {
-          get().setIsCompleted(true);
-        }
-        // else {
-        //   get().onNextQuestion();
-        // }
+          },
+        }));
       },
     }),
     {
@@ -182,7 +170,7 @@ export const useSurveyStore = create<SurveyStore>()(
       storage: createJSONStorage(() => AsyncStorage),
       partialize: (state) => ({
         activeQuestionIndex: state.activeQuestionIndex, // aktif soruyu persist et
-        isCompleted: state.isCompleted, // anketin tamamlanıp tamamlanmadığını persist et
+        completedDate: state.completedDate, // anketin tamamlanıp tamamlanmadığını persist et
         answers: state.answers, // cevapları persist et
         remainingTime: state.remainingTime, // geri sayımı persist et
       }),

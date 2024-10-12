@@ -6,15 +6,15 @@ import { SurveyFooter } from "./components/SurveyFooter";
 import { SurveyQuestions } from "./components/SurveyQuestions";
 
 export const SurveyScreen = () => {
-  const { survey, isCompleted, start, stop } = useSurveyStore();
+  const { survey, completedDate, start, stop } = useSurveyStore();
 
   useEffect(() => {
-    if (survey?.id && !isCompleted) {
+    if (survey?.id && !completedDate) {
       start();
     }
 
     return () => stop(); // component unmount olduğunda interval temizlenir
-  }, [survey,isCompleted]);
+  }, [survey, completedDate]);
 
   return (
     <View className="flex-1 flex-col items-center gap-5">

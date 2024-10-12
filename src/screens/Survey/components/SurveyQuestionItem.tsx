@@ -8,15 +8,15 @@ type SurveyQuestionItemProps = {
 };
 
 export const SurveyQuestionItem = ({ item }: SurveyQuestionItemProps) => {
-  if (item?.type == QuestionType.Likert) {
+  if (item?.type === QuestionType.Likert) {
     return <SurveyQuestionLikertItem item={item} />;
   }
 
-  if (item?.type == QuestionType.SingleSelect) {
+  if (item?.type === QuestionType.SingleSelect) {
     return <SurveyQuestionSingleSelectItem item={item} />;
   }
 
-  if (item?.type == QuestionType.Slider) {
+  if (item?.type === QuestionType.Slider) {
     return <SurveyQuestionSliderItem item={item} />;
   }
 };

@@ -17,7 +17,7 @@ export const SurveyQuestionSliderItem = ({ item }: { item: QuestionDTO }) => {
   const emojiName = useMemo<EntypoName>(() => {
     const minValue = item?.minValue ?? 0;
     const maxValue = item?.maxValue ?? 10;
-    const answer = answers[item?.id]?.value
+    const answer = answers[item?.id]?.value;
     const midValue = ((minValue + maxValue) / 2)?.toExponential(2);
 
     // Tolerans aralığı
@@ -40,7 +40,7 @@ export const SurveyQuestionSliderItem = ({ item }: { item: QuestionDTO }) => {
 
     // eğer min, max veya orta noktada değilse
     return "emoji-sad";
-  }, [answers[item?.id]]);
+  }, [answers, item?.id, item?.minValue, item?.maxValue]);
 
   return (
     <View className="w-screen p-5 items-center justify-center gap-5">

@@ -3,6 +3,10 @@ export type SurveyDTO = {
   name: string;
   duration: number;
   questions: QuestionDTO[];
+  answers?: Record<string, { value: number | string; completionTime: number }>;
+  completedDate?: string;
+  isTimeout?: boolean;
+  isStarted?: boolean;
 };
 
 export type QuestionDTO = {
@@ -18,7 +22,6 @@ export type QuestionDTO = {
 export type OptionDTO = {
   id: string;
   text: string;
-  value: number;
 };
 
 export enum QuestionType {

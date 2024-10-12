@@ -1,5 +1,7 @@
 import {
   ActivityIndicator,
+  StyleProp,
+  TextStyle,
   TouchableOpacity,
   TouchableOpacityProps,
 } from "react-native";
@@ -11,6 +13,7 @@ type ThemedButtonProps = TouchableOpacityProps & {
   children: string | React.ReactNode;
   textClassName?: ClassValue;
   isLoading?: boolean;
+  textStyle?: StyleProp<TextStyle>;
 };
 
 export const ThemedButton = ({
@@ -18,6 +21,7 @@ export const ThemedButton = ({
   className,
   textClassName,
   isLoading,
+  textStyle,
   ...props
 }: ThemedButtonProps) => {
   const renderContent = () => {
@@ -25,10 +29,13 @@ export const ThemedButton = ({
       return (
         <ThemedText
           className={cn("font-semibold", textClassName, {
-            "text-[#1D1D1B] opacity-40": props?.disabled,
-            "text-primary-foreground": !props?.disabled,
+            "text-[#1D1D1B] opacity-40":
+              props?.disabled && !(textStyle as any)?.color,
+            "text-primary-foreground":
+              !props?.disabled && !(textStyle as any)?.color,
             "opacity-40": isLoading,
           })}
+          style={textStyle}
         >
           {children}
         </ThemedText>
@@ -51,6 +58,7 @@ export const ThemedButton = ({
             !props?.disabled && !(props.style as any)?.backgroundColor, // style içinde backgroundColor varsa primary rengini kullanma
         }
       )}
+      style={props?.style}
     >
       {isLoading && <ActivityIndicator color="#fff" />}
       {renderContent()}

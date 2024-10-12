@@ -8,13 +8,6 @@ export const useGetAllSurveysQuery = () => {
   });
 };
 
-export const useGetAvailableSurveysQuery = () => {
-  return useQuery({
-    queryKey: ["getAvailableSurveys"],
-    queryFn: SurveyServiceApi.getAvailableSurveys,
-  });
-};
-
 export const getSurveyByIdQueryConfig = (id: string) => ({
   queryKey: ["getSurveyById", id],
   queryFn: () => SurveyServiceApi.getById(id),
@@ -23,6 +16,20 @@ export const getSurveyByIdQueryConfig = (id: string) => ({
 
 export const useGetSurveyByIdQuery = (id: string) => {
   return useQuery(getSurveyByIdQueryConfig(id));
+};
+
+export const useGetAvailableSurveysQuery = () => {
+  return useQuery({
+    queryKey: ["getAvailableSurveys"],
+    queryFn: SurveyServiceApi.getAvailableSurveys,
+  });
+};
+
+export const useGetStartedSurveysQuery = () => {
+  return useQuery({
+    queryKey: ["getStartedButNotCompletedSurveys"],
+    queryFn: SurveyServiceApi.getStartedSurveys,
+  });
 };
 
 export const useGetCompletedSurveysQuery = () => {

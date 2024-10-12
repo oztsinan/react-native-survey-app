@@ -19,12 +19,10 @@ export const Surveys: SurveyDTO[] = [
           {
             id: "550e8400-e29b-41d4-a716-446655440003",
             text: "Evet",
-            value: 1,
           },
           {
             id: "550e8400-e29b-41d4-a716-446655440004",
             text: "Hayır",
-            value: 0,
           },
         ],
         type: QuestionType.SingleSelect,
@@ -67,12 +65,10 @@ export const Surveys: SurveyDTO[] = [
           {
             id: "550e8400-e29b-41d4-a716-446655440010",
             text: "Evet",
-            value: 1,
           },
           {
             id: "550e8400-e29b-41d4-a716-446655440011",
             text: "Hayır",
-            value: 0,
           },
         ],
         type: QuestionType.SingleSelect,
@@ -106,12 +102,10 @@ export const Surveys: SurveyDTO[] = [
           {
             id: "550e8400-e29b-41d4-a716-446655440016",
             text: "Evet",
-            value: 1,
           },
           {
             id: "550e8400-e29b-41d4-a716-446655440017",
             text: "Hayır",
-            value: 0,
           },
         ],
         type: QuestionType.SingleSelect,

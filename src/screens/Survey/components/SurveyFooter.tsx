@@ -8,25 +8,21 @@ export const SurveyFooter = () => {
   const {
     onPrevQuestion,
     onNextQuestion,
-    setIsCompleted,
     activeQuestionIndex,
     survey,
+    answers,
     remainingTime,
-    isCompleted,
+    completedDate,
   } = useSurveyStore();
 
   const { bottom = 20 } = useSafeAreaInsets();
   const isLastQuestion = activeQuestionIndex === survey?.questions?.length! - 1;
   const isTimeOver = remainingTime === 0;
+  const isSelectedAnswer =
+    !!answers[survey?.questions[activeQuestionIndex]?.id!]?.value;
 
-  const onrNextQuestionHandler = () => {
-    if (isLastQuestion) {
-      setIsCompleted(true);
-      // anketi bitir
-    } else {
-      onNextQuestion();
-      // bir sonraki soruya geç
-    }
+  const onNextQuestionHandler = () => {
+    onNextQuestion();
   };
 
   return (
@@ -36,15 +32,15 @@ export const SurveyFooter = () => {
     >
       <ThemedButton
         onPress={onPrevQuestion}
-        disabled={activeQuestionIndex == 0 || isTimeOver || isCompleted}
+        disabled={activeQuestionIndex === 0 || isTimeOver || !!completedDate}
         className="px-5 py-2"
       >
         <Octicons name="arrow-left" size={24} color="#918fda" />
       </ThemedButton>
 
       <ThemedButton
-        onPress={onrNextQuestionHandler}
-        disabled={isTimeOver || isCompleted}
+        onPress={onNextQuestionHandler}
+        disabled={isTimeOver || !!completedDate || !isSelectedAnswer}
       >
         {isLastQuestion ? "Bitir" : "Sonraki Soru"}
       </ThemedButton>
