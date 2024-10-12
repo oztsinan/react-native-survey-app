@@ -16,6 +16,7 @@ interface SurveyStore {
   setSurvey: (id: string) => Promise<void>; // anketi setlemek için
   start: () => void; // geri sayımı başlat
   stop: () => void; // geri sayımı durdur
+  restartSurvey: () => void; // anketi yeniden başlatmak için
 
   //Question states
   questionsListRef: React.RefObject<FlatList>; // soruları tutmak için referans
@@ -55,6 +56,12 @@ export const useSurveyStore = create<SurveyStore>()(
         }));
       }, // anketi setle
       start: () => {
+        const { isCompleted } = get();
+
+        if (isCompleted) {
+          return;
+        }
+
         const intervalId = setInterval(() => {
           const currentRemainingTime = get().remainingTime;
 
@@ -74,6 +81,20 @@ export const useSurveyStore = create<SurveyStore>()(
           set({ intervalId: null });
         }
       }, // geri sayımı durdur
+      restartSurvey: async () => {
+        const surveyId = get().survey?.id!;
+        await AsyncStorage.removeItem(`survey-store-${surveyId}`);
+        set({
+          survey: undefined,
+          activeQuestionIndex: 0,
+          remainingTime: undefined,
+          intervalId: null,
+          isCompleted: false,
+          answers: {},
+        });
+        get().setSurvey(surveyId);
+        get().start();
+      },
 
       // Question states
       questionsListRef: createRef<FlatList>(), // başlangıçta referans yok
@@ -116,6 +137,7 @@ export const useSurveyStore = create<SurveyStore>()(
         if (!survey || activeQuestionIndex === 0) {
           // İlk sorudayken tamamlanma süresi, toplam süreden kalan süreyi çıkarmaktır
           const completionTime = survey?.duration! - remainingTime;
+
           set((state) => ({
             answers: {
               ...state.answers,
@@ -145,6 +167,14 @@ export const useSurveyStore = create<SurveyStore>()(
             },
           }));
         }
+
+        const surveyQuestionLength = survey?.questions?.length!;
+        if (activeQuestionIndex === surveyQuestionLength - 1) {
+          get().setIsCompleted(true);
+        }
+        // else {
+        //   get().onNextQuestion();
+        // }
       },
     }),
     {

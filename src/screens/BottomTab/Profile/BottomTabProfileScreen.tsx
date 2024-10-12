@@ -8,8 +8,10 @@ import * as WebBrowser from "expo-web-browser";
 import { useAuthStore } from "@/store/AuthStore";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { StorageKeys } from "@/constants/StorageKeys";
+import { useTheme } from "@/hook/useTheme";
 
 export const BottomTabProfileScreen = () => {
+  const { colors } = useTheme();
   const { user, setUser } = useAuthStore();
 
   const onLogoutPress = async () => {
@@ -25,6 +27,7 @@ export const BottomTabProfileScreen = () => {
           await AsyncStorage.removeItem(StorageKeys.REFRESH_TOKEN);
           setUser(undefined);
         },
+        style: "destructive",
       },
     ]);
   };
@@ -66,7 +69,10 @@ export const BottomTabProfileScreen = () => {
         />
 
         <ListItem onPress={onLogoutPress}>
-          <ThemedText className="text-destructive text-sm">
+          <ThemedText
+            style={{ color: colors?.destructive }}
+            className="text-sm"
+          >
             Çıkış Yap
           </ThemedText>
         </ListItem>

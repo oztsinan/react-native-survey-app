@@ -29,8 +29,8 @@ export const AuthLoginView = ({
 
   const form = useForm<FormValues>({
     defaultValues: {
-      email: "john@mail.com",
-      password: "changeme",
+      email: "sinanozturkk@icloud.com",
+      password: "12345678",
     },
     resolver: zodResolver(FormSchema),
   });

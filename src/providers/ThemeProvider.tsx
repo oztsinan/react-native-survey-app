@@ -11,6 +11,7 @@ import { LightTheme } from "../theme/LightTheme";
 import { DarkTheme } from "../theme/DarkTheme";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { StatusBar } from "expo-status-bar";
+import { navigationRef } from "@/utils/navigation";
 
 export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
   const { colorScheme } = useColorScheme();
@@ -47,7 +48,7 @@ export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
 
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
-      <NavigationContainer theme={value}>
+      <NavigationContainer ref={navigationRef} theme={value}>
         <View
           // nativeWind tema değişikliklerini sağlayan değişkenler
           style={nativewindTheme?.[colorScheme as "light"]}

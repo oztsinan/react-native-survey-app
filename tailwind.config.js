@@ -9,14 +9,14 @@ module.exports = {
           DEFAULT: "var(--primary)",
           foreground: "var(--primary-foreground)",
         },
-        foreground: "var(--foreground)",
-        background: "var(--background)",
-        muted: "var(--muted)",
-        border: "var(--border)",
         destructive: {
           DEFAULT: "var(--destructive)",
           foreground: "var(--destructive-foreground)",
         },
+        foreground: "var(--foreground)",
+        background: "var(--background)",
+        muted: "var(--muted)",
+        border: "var(--border)",
       },
       fontFamily: {
         comfortaa: ["Comfortaa"],
