@@ -9,8 +9,10 @@ import { BottomTabSurveyListItem } from "./components/BottomTabSurveyListItem";
 import { ListItem } from "@/components/List/ListItem";
 import { useFocusEffect } from "@react-navigation/native";
 import { useCallback } from "react";
+import { useTranslation } from "react-i18next";
 
 export const BottomTabSurveyScreen = () => {
+  const { t } = useTranslation("SurveyModule");
   const { colors } = useTheme();
   const { data: completedSurveys, isLoading: completedSurveysLoading, refetch: refetchCompletedSurveys } = useGetCompletedSurveysQuery();
   const { data: availableSurveys, isLoading: availableSurveysLoading, refetch: refetchAvailableSurveys } = useGetAvailableSurveysQuery();
@@ -33,14 +35,14 @@ export const BottomTabSurveyScreen = () => {
       return (
         <List renderTitle={() => renderSectionTitle("Anketler")}>
           <ListItem>
-            <ThemedText className="text-sm">Henüz anket bulunmamaktadır.</ThemedText>
+            <ThemedText className="text-sm">{t("noAvailableSurveys")} 🥺</ThemedText>
           </ListItem>
         </List>
       );
     }
 
     return (
-      <List renderTitle={() => renderSectionTitle("Anketler")}>
+      <List renderTitle={() => renderSectionTitle(t("surveys"))}>
         {availableSurveys?.map((survey) => <BottomTabSurveyListItem item={survey} key={survey.id} />)}
       </List>
     );
@@ -50,7 +52,7 @@ export const BottomTabSurveyScreen = () => {
     if (!startedSurveys?.length) return;
 
     return (
-      <List renderTitle={() => renderSectionTitle("Başlatılan Anketler")}>
+      <List renderTitle={() => renderSectionTitle(t("startedSurveys"))}>
         {startedSurveys?.map((survey) => <BottomTabSurveyListItem item={survey} key={survey.id} />)}
       </List>
     );
@@ -60,7 +62,7 @@ export const BottomTabSurveyScreen = () => {
     if (!completedSurveys?.length) return;
 
     return (
-      <List renderTitle={() => renderSectionTitle("Tamamlanan Anketler")}>
+      <List renderTitle={() => renderSectionTitle(t("completedSurveys"))}>
         {completedSurveys?.map((survey) => <BottomTabSurveyListItem item={survey} key={survey.id} />)}
       </List>
     );
@@ -70,7 +72,7 @@ export const BottomTabSurveyScreen = () => {
     if (!timeoutSurveys?.length) return;
 
     return (
-      <List renderTitle={() => renderSectionTitle("Zaman Aşımına Uğrayan Anketler")}>
+      <List renderTitle={() => renderSectionTitle(t("timeoutSurveys"))}>
         {timeoutSurveys?.map((survey) => <BottomTabSurveyListItem item={survey} key={survey.id} />)}
       </List>
     );

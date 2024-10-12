@@ -8,6 +8,7 @@ import Dialog from "react-native-dialog";
 import { useUpdateUserMutation } from "@/api/User";
 import { useAuthStore } from "@/store/AuthStore";
 import { UserDTO } from "@/api/User";
+import { useTranslation } from "react-i18next";
 
 type BottomTabProfileEditListItemProps = {
   title: string;
@@ -15,11 +16,8 @@ type BottomTabProfileEditListItemProps = {
   dtoKey: keyof UserDTO;
 };
 
-export const BottomTabProfileEditListItem = ({
-  title,
-  value,
-  dtoKey,
-}: BottomTabProfileEditListItemProps) => {
+export const BottomTabProfileEditListItem = ({ title, value, dtoKey }: BottomTabProfileEditListItemProps) => {
+  const { t } = useTranslation();
   const { user } = useAuthStore();
   const { colors } = useTheme();
   const { mutateAsync: updateUser } = useUpdateUserMutation();
@@ -49,10 +47,7 @@ export const BottomTabProfileEditListItem = ({
 
   return (
     <Fragment>
-      <ListItem
-        onPress={showDialog}
-        className="flex-row justify-between items-center"
-      >
+      <ListItem onPress={showDialog} className="flex-row justify-between items-center">
         <View className="grid gap-1">
           <ThemedText className="text-sm">{title}</ThemedText>
           <ThemedText className="text-xs">{value}</ThemedText>
@@ -62,12 +57,9 @@ export const BottomTabProfileEditListItem = ({
 
       <Dialog.Container visible={visible}>
         <Dialog.Title>{title}</Dialog.Title>
-        <Dialog.Input
-          value={inputValue}
-          onChangeText={(text) => setInputValue(text)}
-        />
-        <Dialog.Button label="İptal" onPress={handleCancel} />
-        <Dialog.Button label="Tamam" onPress={handleOk} />
+        <Dialog.Input value={inputValue} onChangeText={(text) => setInputValue(text)} />
+        <Dialog.Button label={t("cancel")} onPress={handleCancel} />
+        <Dialog.Button label={t("ok")} onPress={handleOk} />
       </Dialog.Container>
     </Fragment>
   );

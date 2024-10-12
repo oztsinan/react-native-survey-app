@@ -13,6 +13,7 @@ import { useColorScheme } from "nativewind";
 import { useTheme } from "@/hook/useTheme";
 import { cn } from "@/utils/cn";
 import { BottomTabBarButtonProps } from "@react-navigation/bottom-tabs/lib/typescript/src/types";
+import i18next from "i18next";
 
 const BottomTab = () => {
   const Tab = createBottomTabNavigator<BottomTabParams>();
@@ -20,8 +21,7 @@ const BottomTab = () => {
   const { colorScheme } = useColorScheme();
 
   const screenWidth = Dimensions.get("window").width;
-  const bottomTabBackgroundColor =
-    colorScheme == "light" ? "#1d1d1b" : "#1E201E";
+  const bottomTabBackgroundColor = colorScheme == "light" ? "#1d1d1b" : "#1E201E";
 
   return (
     <Tab.Navigator
@@ -53,9 +53,7 @@ const BottomTab = () => {
         options={{
           title: "Survey",
           tabBarLabel: (props) => <TabBarLabel {...props} />,
-          tabBarIcon: ({ color }) => (
-            <SimpleLineIcons name="graph" size={25} color={color} />
-          ),
+          tabBarIcon: ({ color }) => <SimpleLineIcons name="graph" size={25} color={color} />,
         }}
       />
       <Tab.Screen
@@ -73,28 +71,16 @@ const BottomTab = () => {
         name={Routes.BOTTOM_TAB_PROFILE}
         component={BottomTabProfileScreen}
         options={{
-          title: "Profile",
+          title: i18next.t("ProfileModule:profile"),
           tabBarLabel: (props) => <TabBarLabel {...props} />,
-          tabBarIcon: ({ focused }) => (
-            <MaterialCommunityIcons
-              name="account"
-              size={25}
-              color={focused ? "#9593FF" : "white"}
-            />
-          ),
+          tabBarIcon: ({ focused }) => <MaterialCommunityIcons name="account" size={25} color={focused ? "#9593FF" : "white"} />,
         }}
       />
     </Tab.Navigator>
   );
 };
 
-const TabBarLabel = ({
-  color,
-  children,
-}: {
-  color: string;
-  children: string;
-}) => {
+const TabBarLabel = ({ color, children }: { color: string; children: string }) => {
   return (
     <Text
       className={cn("text-xs font-semibold font-comfortaa")}
@@ -107,17 +93,12 @@ const TabBarLabel = ({
   );
 };
 
-const HomeTabBarButton = ({
-  accessibilityState,
-  children,
-  onPress,
-}: BottomTabBarButtonProps) => {
+const HomeTabBarButton = ({ accessibilityState, children, onPress }: BottomTabBarButtonProps) => {
   //ToDo : to be refactored
   const isFocused = accessibilityState?.selected;
   const { colors } = useTheme();
   const { colorScheme } = useColorScheme();
-  const bottomTabBackgroundColor =
-    colorScheme == "light" ? "#1d1d1b" : "#1E201E";
+  const bottomTabBackgroundColor = colorScheme == "light" ? "#1d1d1b" : "#1E201E";
 
   return (
     <TouchableOpacity

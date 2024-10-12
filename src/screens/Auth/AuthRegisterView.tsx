@@ -13,9 +13,9 @@ import { AuthScreenRoutes } from "@/constants/AuthScreenRoutes";
 import { useCreateUserMutation } from "@/api/User";
 import { DatePickerField } from "@/components/Field/DatePickerField";
 import { z } from "zod";
-import { useAuthLoginMutation } from "@/api/Auth";
 import { Notifier, NotifierComponents } from "react-native-notifier";
 import { queryClient } from "@/providers/QueryProvider";
+import { useTranslation } from "react-i18next";
 
 const FormSchema = z
   .object({
@@ -29,7 +29,7 @@ const FormSchema = z
     if (data.password !== data.rePassword) {
       ctx.addIssue({
         code: z.ZodIssueCode.custom,
-        message: "New password and confirm password must match",
+        message: "Error",
         path: ["rePassword"],
       });
     }
@@ -37,11 +37,8 @@ const FormSchema = z
 
 type FormValues = z.infer<typeof FormSchema>;
 
-export const AuthRegisterView = ({
-  setIndex,
-}: {
-  setIndex: Dispatch<React.SetStateAction<number>>;
-}) => {
+export const AuthRegisterView = ({ setIndex }: { setIndex: Dispatch<React.SetStateAction<number>> }) => {
+  const { t } = useTranslation("AuthModule");
   const { mutateAsync: createUser } = useCreateUserMutation();
 
   const form = useForm<FormValues>({
@@ -67,19 +64,17 @@ export const AuthRegisterView = ({
         name="name"
         render={({ field, fieldState }) => (
           <FormItem>
-            <FormLabel>İsim</FormLabel>
+            <FormLabel>{t("name")}</FormLabel>
             <TextField
               ref={field.ref}
               value={field.value}
               onChangeText={field.onChange}
-              placeholder="Adınız"
+              placeholder={t("name")}
               error={fieldState.error?.message}
               returnKeyType="next"
               onSubmitEditing={() => form.setFocus("email")}
             />
-            <FormDescription>
-              İsiminizle bir hesap oluşturulacak.
-            </FormDescription>
+            <FormDescription>{t("nameDescription")}</FormDescription>
           </FormItem>
         )}
       />
@@ -93,7 +88,7 @@ export const AuthRegisterView = ({
         name="email"
         render={({ field, fieldState }) => (
           <FormItem>
-            <FormLabel>Email</FormLabel>
+            <FormLabel>{t("email")}</FormLabel>
             <TextField
               ref={field.ref}
               value={field.value}
@@ -116,7 +111,7 @@ export const AuthRegisterView = ({
         name="password"
         render={({ field, fieldState }) => (
           <FormItem>
-            <FormLabel>Şifre</FormLabel>
+            <FormLabel>{t("password")}</FormLabel>
             <PasswordField
               ref={field.ref}
               value={field.value}
@@ -126,9 +121,7 @@ export const AuthRegisterView = ({
               returnKeyType="next"
               onSubmitEditing={() => form.setFocus("rePassword")}
             />
-            <FormDescription>
-              Şifreniz en az 6 karakter olmalıdır.
-            </FormDescription>
+            <FormDescription>{t("passwordDescription")}</FormDescription>
           </FormItem>
         )}
       />
@@ -142,7 +135,7 @@ export const AuthRegisterView = ({
         name="rePassword"
         render={({ field, fieldState }) => (
           <FormItem>
-            <FormLabel>Şifre Tekrar</FormLabel>
+            <FormLabel>{t("rePassword")}</FormLabel>
             <PasswordField
               ref={field.ref}
               value={field.value}
@@ -152,7 +145,7 @@ export const AuthRegisterView = ({
               returnKeyType="done"
               onSubmitEditing={handleSubmit}
             />
-            <FormDescription>Şifrenizi tekrar giriniz.</FormDescription>
+            <FormDescription>{t("rePasswordDescription")}</FormDescription>
           </FormItem>
         )}
       />
@@ -166,13 +159,9 @@ export const AuthRegisterView = ({
         name="birthdate"
         render={({ field, fieldState }) => (
           <FormItem>
-            <FormLabel>Doğum Tarihi</FormLabel>
-            <DatePickerField
-              value={field?.value}
-              onChange={field.onChange}
-              error={fieldState.error?.message}
-            />
-            <FormDescription>Doğum tarihinizi giriniz.</FormDescription>
+            <FormLabel>{t("birthdate")}</FormLabel>
+            <DatePickerField value={field?.value} onChange={field.onChange} error={fieldState.error?.message} />
+            <FormDescription>{t("birthDateDescription")}</FormDescription>
           </FormItem>
         )}
       />
@@ -193,8 +182,8 @@ export const AuthRegisterView = ({
 
     //kayıt başarılı ise toast göster
     Notifier.showNotification({
-      title: "Kayıt başarılı",
-      description: "İzinleri de doğrulayarak sisteme giriş yapabilirsiniz.",
+      title: t("successRegisterToast.title"),
+      description: t("successRegisterToast.message"),
       Component: NotifierComponents.Alert,
       componentProps: {
         alertType: "success",
@@ -207,33 +196,25 @@ export const AuthRegisterView = ({
   return (
     <View className="flex-1 px-16 flex-col justify-between items-center">
       <View className="flex-1 w-full items-center">
-        <ScrollView
-          className="w-full"
-          contentContainerClassName="flex-col items-center gap-2"
-          showsVerticalScrollIndicator={false}
-        >
+        <ScrollView className="w-full" contentContainerClassName="flex-col items-center gap-2" showsVerticalScrollIndicator={false}>
           {renderNameField()}
           {renderEmailField()}
           {renderPasswordField()}
           {renderRePasswordField()}
           {/* {renderBirthdateField()} 
-           // Tasarımda olduğu için eklendi , kullandığım platzi fake store api schema'sında doğum tarihi yok
+           // Tasarımda olduğu için eklendi , kullandığım platzi fake store api schema'sında doğum tarihi olmadığından dolayı gizlendi
           */}
         </ScrollView>
       </View>
 
       <View className="items-center gap-4">
-        <ThemedButton
-          isLoading={form.formState.isSubmitting}
-          onPress={handleSubmit}
-          className="px-8"
-        >
-          İlerle
+        <ThemedButton isLoading={form.formState.isSubmitting} onPress={handleSubmit} className="px-8">
+          {t("continue")}
         </ThemedButton>
         <ThemedText className="text-sm">
-          Hesabınız var mı?{" "}
+          {t("doYouHaveAccount")}{" "}
           <ThemedText onPress={onNavigateLogin} className="text-primary">
-            Giriş Yap
+            {t("login")}
           </ThemedText>
         </ThemedText>
       </View>

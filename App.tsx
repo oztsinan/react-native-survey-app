@@ -1,10 +1,9 @@
-import { ThemeProvider } from "./src/providers/ThemeProvider";
 import RootStack from "./src/navigations/RootStack";
-
-//nativewind v4 versiyonunda gerekli olan global css dosyası
-import "./src/assets/global.css";
-import { QueryProvider } from "@/providers/QueryProvider";
-import { NotifierWrapper } from "react-native-notifier";
+import { ThemeProvider } from "./src/providers/ThemeProvider";
+import { QueryProvider } from "@/providers/QueryProvider"; // query provider
+import { NotifierWrapper } from "react-native-notifier"; // toast mesajları için kullanılan kütüphane
+import "./src/assets/global.css"; //nativewind v4 versiyonunda gerekli olan global css dosyası
+import "@/locales/i18n"; // i18n dosyasını import ediyoruz
 
 export default function App() {
   return (

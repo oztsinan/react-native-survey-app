@@ -1,0 +1,36 @@
+{
+  "surveys": "Surveys",
+  "completedSurveys": "Tamamlanan Anketler",
+  "startedSurveys": "Started Surveys",
+  "timeoutSurveys": "Timeout Surveys",
+  "noAvailableSurveys": "No available surveys",
+  "startSurveyAlert": {
+    "title": "Start Survey",
+    "message": "Are you sure you want to start the survey?"
+  },
+  "restartSurveyAlert": {
+    "title": "Restart Survey",
+    "message": "Are you sure you want to restart the survey?"
+  },
+  "statistics": "Statistics",
+  "continue": "Continue",
+  "start": "Start",
+  "restart": "Restart",
+  "answer": "Answer",
+  "duration": "Duration",
+  "second": "second",
+  "finish": "Finish",
+  "nextQuestion": "Next Question",
+  "surveyCompleted": "Survey Completed 🎉",
+  "surveyTimeOver": "Survey timeover",
+  "surveyTimeOverDescription": "You cannot answer because the survey time is up.",
+  "thankYou": "Thank You",
+  "likertOptions": {
+    "1": "Very Bad",
+    "2": "Bad",
+    "3": "Normal",
+    "4": "Good",
+    "5": "Very Good"
+  },
+  "pleaseSelect": "Please select"
+}

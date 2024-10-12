@@ -1,0 +1,36 @@
+{
+  "surveys": "Anketler",
+  "completedSurveys": "Tamamlanan Anketler",
+  "startedSurveys": "Başlanan Anketler",
+  "timeoutSurveys": "Zaman Aşımına Uğrayan Anketler",
+  "noAvailableSurveys": "Anket bulunamadı",
+  "startSurveyAlert": {
+    "title": "Anketi Başlat",
+    "message": "Anketi başlatmak istediğinizden emin misiniz?"
+  },
+  "restartSurveyAlert": {
+    "title": "Anketi Yeniden Başlat",
+    "message": "Anketi yeniden başlatmak istediğinizden emin misiniz?"
+  },
+  "statistics": "İstatistikler",
+  "continue": "Devam Et",
+  "start": "Başlat",
+  "restart": "Yeniden Başlat",
+  "answer": "Cevap",
+  "duration": "Süre",
+  "second": "saniye",
+  "finish": "Bitir",
+  "nextQuestion": "Sonraki Soru",
+  "surveyCompleted": "Anket Tamamlandı 🎉",
+  "surveyTimeOver": "Anket süresi doldu",
+  "surveyTimeOverDescription": "Anket süresi dolduğu için cevap veremezsiniz.",
+  "thankYou": "Teşekkürler",
+  "likertOptions": {
+    "1": "Çok Kötü",
+    "2": "Kötü",
+    "3": "Normal",
+    "4": "İyi",
+    "5": "Çok İyi"
+  },
+  "pleaseSelect": "Lütfen seçiniz"
+}

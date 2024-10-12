@@ -7,10 +7,12 @@ import { useTheme } from "@react-navigation/native";
 import { hexToRgba } from "@/utils/color";
 import { useMemo } from "react";
 import Entypo from "@expo/vector-icons/Entypo";
+import { useTranslation } from "react-i18next";
 
 type EntypoName = keyof typeof Entypo.glyphMap; // Entypo isimlerini al
 
 export const SurveyQuestionSliderItem = ({ item }: { item: QuestionDTO }) => {
+  const { t } = useTranslation("SurveyModule");
   const { colors } = useTheme();
   const { answers, setAnswer } = useSurveyStore();
 
@@ -44,9 +46,7 @@ export const SurveyQuestionSliderItem = ({ item }: { item: QuestionDTO }) => {
 
   return (
     <View className="w-screen p-5 items-center justify-center gap-5">
-      <ThemedText className="text-center text-lg font-semibold">
-        {item.text}
-      </ThemedText>
+      <ThemedText className="text-center text-lg font-semibold">{item.text}</ThemedText>
 
       <Entypo name={emojiName} size={150} color={colors.primary} />
 
@@ -61,9 +61,7 @@ export const SurveyQuestionSliderItem = ({ item }: { item: QuestionDTO }) => {
         step={item?.step}
       />
 
-      <ThemedText className="text-sm font-semibold">
-        {answers[item?.id]?.value ?? "Lütfen Değer Seçiniz"}
-      </ThemedText>
+      <ThemedText className="text-sm font-semibold">{answers[item?.id]?.value ?? t("pleaseSelect")}</ThemedText>
     </View>
   );
 };

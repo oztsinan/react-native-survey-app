@@ -6,9 +6,11 @@ import { RootStackScreenProps } from "@/navigations/RootStackParams";
 import { Routes } from "@/navigations/Routes";
 import { useRoute } from "@react-navigation/native";
 import { useMemo } from "react";
-import { ActivityIndicator, ScrollView } from "react-native";
+import { useTranslation } from "react-i18next";
+import { ActivityIndicator, ScrollView, View } from "react-native";
 
 export const SurveyResultScreen = () => {
+  const { t } = useTranslation("SurveyModule");
   const { params } = useRoute<RootStackScreenProps<Routes.SURVEY_RESULT>["route"]>();
   const { data, isLoading } = useGetSurveyByIdQuery(params?.id);
 
@@ -42,14 +44,19 @@ export const SurveyResultScreen = () => {
   return (
     <ScrollView contentInsetAdjustmentBehavior="automatic" contentContainerClassName="p-page">
       <List>
-        <ListItem className="bg-green-600">
+        <View className={"bg-green-500 p-3 px-4 rounded-lg"}>
           <ThemedText className="text-white">{data?.name}</ThemedText>
-        </ListItem>
+        </View>
         {questionsWithAnswers?.map((item, index) => (
           <ListItem className="gap-3" key={index}>
             <ThemedText className="text-sm font-bold">{item?.text}</ThemedText>
-            <ThemedText className="text-sm">Cevap : {item?.answer}</ThemedText>
-            <ThemedText className="text-sm">Süre : {item?.answerCompletionTime} saniye</ThemedText>
+            <ThemedText className="text-sm">
+              {t("answer")}: {item?.answer}
+            </ThemedText>
+            <ThemedText className="text-sm">
+              {t("duration")}: {item?.answerCompletionTime}
+              {t("second")}
+            </ThemedText>
           </ListItem>
         ))}
       </List>

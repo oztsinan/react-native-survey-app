@@ -11,12 +11,15 @@ import Animated, { Easing, interpolate, useAnimatedStyle, useSharedValue, withTi
 import { ThemedButton } from "@/components/Themed/ThemedButton";
 import { useState } from "react";
 import { baseFormatDate } from "@/utils/date";
+import { useTranslation } from "react-i18next";
 
 type BottomTabSurveyListItemProps = {
   item?: SurveyDTO;
 };
 
 export const BottomTabSurveyListItem = ({ item }: BottomTabSurveyListItemProps) => {
+  const { t } = useTranslation("SurveyModule");
+  const { t: tCommon } = useTranslation("common");
   const navigation = useTypedNavigation<RootStackParams>();
   const shareValue = useSharedValue(0);
 
@@ -25,13 +28,13 @@ export const BottomTabSurveyListItem = ({ item }: BottomTabSurveyListItemProps) 
   const [isExpanded, setIsExpanded] = useState(false);
 
   const onStartPress = async () => {
-    Alert.alert("Anket başlatılacaktır", "Anketi başlatmak istediğinize emin misiniz?", [
+    Alert.alert(t("startSurveyAlert.title"), t("startSurveyAlert.message"), [
       {
-        text: "İptal",
+        text: tCommon("cancel"),
         style: "cancel",
       },
       {
-        text: "Başlat",
+        text: t("start"),
         onPress: async () => {
           await setSurvey(item?.id!);
           useSurveyStore.persist.setOptions({
@@ -60,13 +63,13 @@ export const BottomTabSurveyListItem = ({ item }: BottomTabSurveyListItemProps) 
   };
 
   const onRestartPress = () => {
-    Alert.alert("Anket tekrar başlatılacaktır", "Anketi tekrar başlatmak istediğinize emin misiniz?", [
+    Alert.alert(t("restartSurveyAlert.title"), t("restartSurveyAlert.message"), [
       {
-        text: "İptal",
+        text: tCommon("cancel"),
         style: "cancel",
       },
       {
-        text: "Başlat",
+        text: t("restart"),
         onPress: async () => {
           await setSurvey(item?.id!);
           useSurveyStore.persist.setOptions({
@@ -134,19 +137,19 @@ export const BottomTabSurveyListItem = ({ item }: BottomTabSurveyListItemProps) 
         <View className="flex-row justify-end gap-2">
           {item?.completedDate && (
             <ThemedButton onPress={onResultPress} className="h-9 px-4" textClassName="text-sm">
-              İstatistikler
+              {t("statistics")}
             </ThemedButton>
           )}
 
           {!item?.completedDate && !item?.isTimeout && (
             <ThemedButton onPress={item?.isStarted ? onContinuePress : onStartPress} className="h-9 px-4 bg-green-500" textClassName="text-sm">
-              {item?.isStarted ? "Devam Et" : "Başlat"}
+              {item?.isStarted ? t("continue") : t("start")}
             </ThemedButton>
           )}
 
           {(item?.completedDate || item?.isTimeout) && (
             <ThemedButton onPress={onRestartPress} className="h-9 px-4 bg-green-500" textClassName="text-sm">
-              Tekrar
+              {t("restart")}
             </ThemedButton>
           )}
         </View>

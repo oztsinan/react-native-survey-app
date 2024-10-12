@@ -1,0 +1,32 @@
+{
+  "welcome": "Welcome",
+  "login": "Login",
+  "email": "Email",
+  "emailDescription": "Please enter your email",
+  "password": "Password",
+  "passwordDescription": "Your password must be at least 6 characters",
+  "rePassword": "Re-Password",
+  "rePasswordDescription": "Re-enter your password",
+  "forgotPassword": "Forgot Password",
+  "notMember": "Not a Member?",
+  "doYouHaveAccount": "Do you have an account?",
+  "createAccount": "Create Account",
+  "name": "Name",
+  "nameDescription": "Please enter your name",
+  "birthDate": "Birth Date",
+  "birthDateDescription": "Please enter your birth date",
+  "continue": "Continue",
+  "successLoginToast": {
+    "title": "Successful Login",
+    "description": "You have successfully logged in."
+  },
+  "successRegisterToast": {
+    "title": "Successful Registration",
+    "description": "Your registration has been successfully created. Please click on the verification link sent to your email address to verify your account."
+  },
+  "registerPermissionTitle": "About Sensitive Data",
+  "registerPermissionDescription": "In order to use our application, you need to approve the permissions below.",
+  "kvkkText": "Within the scope of the Personal Data Protection Law (KVKK), I have read, understood, and accept the information regarding the processing of my personal data.",
+  "privacyText": "I have carefully read the Privacy Policy, understood how my personal information is collected, used, and protected, and I accept the Privacy Policy.",
+  "termsText": "I have read the Terms of Use of the application, have been informed about the rules and obligations I must follow while using the site, and I accept these terms."
+}

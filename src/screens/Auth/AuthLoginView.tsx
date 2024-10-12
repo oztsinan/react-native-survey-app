@@ -12,6 +12,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useAuthLoginMutation } from "@/api/Auth";
 import { Dispatch } from "react";
 import { AuthScreenRoutes } from "@/constants/AuthScreenRoutes";
+import { useTranslation } from "react-i18next";
+import { Notifier, NotifierComponents } from "react-native-notifier";
 
 const FormSchema = z.object({
   email: z.string().trim().min(1),
@@ -20,11 +22,8 @@ const FormSchema = z.object({
 
 type FormValues = z.infer<typeof FormSchema>;
 
-export const AuthLoginView = ({
-  setIndex,
-}: {
-  setIndex: Dispatch<React.SetStateAction<number>>;
-}) => {
+export const AuthLoginView = ({ setIndex }: { setIndex: Dispatch<React.SetStateAction<number>> }) => {
+  const { t } = useTranslation("AuthModule");
   const { mutateAsync: login } = useAuthLoginMutation();
 
   const form = useForm<FormValues>({
@@ -41,6 +40,15 @@ export const AuthLoginView = ({
 
   const onSubmit = async (data: FormValues) => {
     await login(data);
+
+    Notifier.showNotification({
+      title: t("successLoginToast.title"),
+      description: t("successLoginToast.message"),
+      Component: NotifierComponents.Alert,
+      componentProps: {
+        alertType: "success",
+      },
+    });
   };
 
   const handleSubmit = form.handleSubmit(onSubmit);
@@ -52,7 +60,7 @@ export const AuthLoginView = ({
         name="email"
         render={({ field, fieldState }) => (
           <FormItem>
-            <FormLabel>Email</FormLabel>
+            <FormLabel>{t("email")}</FormLabel>
             <TextField
               ref={field.ref}
               value={field.value}
@@ -62,9 +70,7 @@ export const AuthLoginView = ({
               returnKeyType="next"
               onSubmitEditing={() => form.setFocus("password")}
             />
-            <FormDescription>
-              Giriş yapmak için lütfen email adresinizi giriniz.
-            </FormDescription>
+            <FormDescription>{t("emailDescription")}</FormDescription>
           </FormItem>
         )}
       />
@@ -78,7 +84,7 @@ export const AuthLoginView = ({
         name="password"
         render={({ field, fieldState }) => (
           <FormItem>
-            <FormLabel>Şifre</FormLabel>
+            <FormLabel>{t("password")}</FormLabel>
             <PasswordField
               ref={field?.ref}
               value={field.value}
@@ -88,9 +94,7 @@ export const AuthLoginView = ({
               returnKeyType="done"
               onSubmitEditing={handleSubmit}
             />
-            <FormDescription className="text-right opacity-60">
-              Şifremi Unuttum
-            </FormDescription>
+            <FormDescription className="text-right opacity-60">{t("forgotPassword")}</FormDescription>
           </FormItem>
         )}
       />
@@ -99,7 +103,7 @@ export const AuthLoginView = ({
 
   return (
     <View className="flex-1 px-16 flex-col justify-between items-center">
-      <ThemedText className="text-2xl font-bold my-10">Hoşgeldiniz</ThemedText>
+      <ThemedText className="text-2xl font-bold my-10">{t("welcome")}</ThemedText>
 
       <View className="w-full flex flex-col items-center gap-5">
         {renderEmailField()}
@@ -107,17 +111,13 @@ export const AuthLoginView = ({
       </View>
 
       <View className="items-center gap-4">
-        <ThemedButton
-          isLoading={form.formState.isSubmitting}
-          onPress={handleSubmit}
-          className="px-8"
-        >
-          Giriş Yap
+        <ThemedButton isLoading={form.formState.isSubmitting} onPress={handleSubmit} className="px-8">
+          {t("login")}
         </ThemedButton>
         <ThemedText className="text-sm">
-          Üye değil misiniz?{" "}
+          {t("notMember")}{" "}
           <ThemedText onPress={onNavigateRegister} className="text-primary">
-            Hesap Oluştur
+            {t("createAccount")}
           </ThemedText>
         </ThemedText>
       </View>

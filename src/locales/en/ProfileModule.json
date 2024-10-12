@@ -1,0 +1,10 @@
+{
+  "profile": "Profile",
+  "accountInformation": "Account Information",
+  "name": "Name",
+  "email": "Email",
+  "logout": "Logout",
+  "aboutUs": "About Us",
+  "privacyPolicy": "Privacy Policy",
+  "termsAndConditions": "Terms and Conditions"
+}

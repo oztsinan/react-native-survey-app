@@ -1,0 +1,32 @@
+{
+  "welcome": "Hoşgeldiniz",
+  "login": "Giriş Yap",
+  "email": "E-posta",
+  "emailDescription": "Lütfen e-posta adresinizi girin",
+  "password": "Şifre",
+  "passwordDescription": "Şifreniz en az 6 karakter olmalıdır",
+  "rePassword": "Şifre Tekrarı",
+  "rePasswordDescription": "Şifrenizi tekrar girin",
+  "forgotPassword": "Şifremi Unuttum",
+  "notMember": "Üye Değil Misiniz?",
+  "doYouHaveAccount": "Hesabınız var mı?",
+  "createAccount": "Hesap Oluştur",
+  "name": "Ad",
+  "nameDescription": "Lütfen adınızı girin",
+  "birthDate": "Doğum Tarihi",
+  "birthDateDescription": "Lütfen doğum tarihinizi girin",
+  "continue": "Devam Et",
+  "successLoginToast": {
+    "title": "Başarılı Giriş",
+    "message": "Başarıyla giriş yaptınız."
+  },
+  "successRegisterToast": {
+    "title": "Başarılı Kayıt",
+    "message": "Kaydınız başarıyla oluşturuldu. Lütfen e-posta adresinize gönderilen doğrulama linkine tıklayarak hesabınızı doğrulayın."
+  },
+  "registerPermissionTitle": "Hassas Veriler Hakkında",
+  "registerPermissionDescription": "Uygulamamızı kullanabilmek için aşağıdaki izinleri onaylamanız gerekmektedir.",
+  "kvkkText": "Kişisel Verilerin Korunması Kanunu (KVKK) kapsamında, kişisel verilerimin işlenmesine dair bilgilendirmeyi okudum, anladım ve bu sözleşmeyi kabul ediyorum.",
+  "privacyText": "Gizlilik Politikası'nı dikkatlice okudum, kişisel bilgilerimin nasıl toplandığını, kullanıldığını ve korunduğunu anladım, ve Gizlilik Politikası'nı kabul ediyorum.",
+  "termsText": "Uygulamanın Kullanım Şartları'nı okudum, siteyi kullanırken uymam gereken kurallar ve yükümlülükler hakkında bilgilendirildim, ve bu şartları kabul ediyorum."
+}

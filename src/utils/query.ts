@@ -1,3 +1,4 @@
+import i18next from "i18next";
 import { Notifier, NotifierComponents } from "react-native-notifier";
 
 export const onQueryError = (error: any) => {
@@ -15,7 +16,7 @@ export const onQueryError = (error: any) => {
   }
 
   Notifier.showNotification({
-    title: "Error",
+    title: i18next.t("error"), // Başlık kısmına "Hata" kelimesini geçiyoruz
     description: errorMessage, // Hata mesajını buraya geçiriyoruz
     Component: NotifierComponents.Alert,
     componentProps: {

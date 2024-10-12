@@ -9,24 +9,18 @@ import { BottomTabParams } from "@/navigations/RootStackParams";
 import { Routes } from "@/navigations/Routes";
 import { useTheme } from "@/hook/useTheme";
 import { useAuthStore } from "@/store/AuthStore";
+import { useTranslation } from "react-i18next";
 
 export const BottomTabHomeScreen = () => {
   const navigation = useTypedNavigation<BottomTabParams>();
   const { colors } = useTheme();
   const { user } = useAuthStore();
+  const { t } = useTranslation("HomeModule");
 
   return (
-    <ScrollView
-      contentContainerClassName="flex items-center gap-10"
-      bounces={false}
-    >
+    <ScrollView contentContainerClassName="flex items-center gap-10" bounces={false}>
       <View className="w-full h-[500px]">
-        <Image
-          source={Assets.images.background}
-          contentFit="cover"
-          contentPosition="top"
-          style={{ width: "100%", height: "100%" }}
-        />
+        <Image source={Assets.images.background} contentFit="cover" contentPosition="top" style={{ width: "100%", height: "100%" }} />
 
         <LinearGradient
           colors={["transparent", "transparent", colors?.background]}
@@ -39,15 +33,11 @@ export const BottomTabHomeScreen = () => {
       </View>
 
       <ThemedText className="text-lg">
-        Merhaba{" "}
-        <ThemedText className="text-lg text-primary">{user?.name}</ThemedText>
+        {t("hello")} <ThemedText className="text-lg text-primary">{user?.name}</ThemedText>
       </ThemedText>
 
-      <ThemedButton
-        onPress={() => navigation.navigate(Routes.BOTTOM_TAB_SURVEY)}
-        className="px-7"
-      >
-        Ankete Başla
+      <ThemedButton onPress={() => navigation.navigate(Routes.BOTTOM_TAB_SURVEY)} className="px-7">
+        {t("startSurvey")}
       </ThemedButton>
     </ScrollView>
   );
