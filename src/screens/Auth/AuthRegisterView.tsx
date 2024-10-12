@@ -193,7 +193,7 @@ export const AuthRegisterView = ({
 
     //kayıt başarılı ise toast göster
     Notifier.showNotification({
-      title: "kayıt başarılı",
+      title: "Kayıt başarılı",
       description: "İzinleri de doğrulayarak sisteme giriş yapabilirsiniz.",
       Component: NotifierComponents.Alert,
       componentProps: {

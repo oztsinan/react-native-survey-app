@@ -8,6 +8,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Controller, useForm } from "react-hook-form";
 import { ScrollView } from "react-native";
 import { View } from "react-native";
+import { Notifier, NotifierComponents } from "react-native-notifier";
 import { z } from "zod";
 
 const FormSchema = z.object({
@@ -20,20 +21,31 @@ type FormValues = z.infer<typeof FormSchema>;
 
 export const AuthRegisterPermissionsView = () => {
   const createdUser = queryClient.getQueryData(["createdUser"]); // kayıt oluşturulduktan sonra kullanıcı bilgilerini almak için
-  const { mutateAsync: login, isPending } = useAuthLoginMutation();
-
-  const onFinishRegister = async () => {
-    await login({
-      email: (createdUser as UserDTO)?.email,
-      password: (createdUser as UserDTO)?.password,
-    });
-    await queryClient.setQueryData(["createdUser"], undefined); // kullanıcı bilgilerini sıfırla
-  };
+  const { mutateAsync: login } = useAuthLoginMutation();
 
   const form = useForm<FormValues>({
     resolver: zodResolver(FormSchema),
     mode: "onChange", // herhangi bir değişiklik olduğunda formu kontrol et
   });
+
+  const onSubmit = async (data: FormValues) => {
+    await login({
+      email: (createdUser as UserDTO)?.email,
+      password: (createdUser as UserDTO)?.password,
+    });
+    await queryClient.setQueryData(["createdUser"], undefined); // kullanıcı bilgilerini sıfırla
+
+    Notifier.showNotification({
+      title: "Kayıt başarılı",
+      description: "Giriş yapıldı",
+      Component: NotifierComponents.Alert,
+      componentProps: {
+        alertType: "success",
+      },
+    });
+  };
+
+  const handleSubmit = form.handleSubmit(onSubmit);
 
   return (
     <View className="flex-1 justify-center items-center">
@@ -88,8 +100,8 @@ export const AuthRegisterPermissionsView = () => {
 
       <ThemedButton
         disabled={!form.formState.isValid}
-        isLoading={isPending}
-        onPress={onFinishRegister}
+        isLoading={form.formState.isSubmitting}
+        onPress={handleSubmit}
         className="px-8"
       >
         İlerle
