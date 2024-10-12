@@ -1,5 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import UserServiceApi from "./User.api";
+import { useAuthStore } from "@/store/AuthStore";
+import { getAuthMeQueryConfig } from "../Auth";
 
 export const useGetUserByIdQuery = (id: string) => {
   return useQuery({
@@ -10,27 +12,20 @@ export const useGetUserByIdQuery = (id: string) => {
 };
 
 export const useCreateUserMutation = () => {
-  const queryClient = useQueryClient();
-
   return useMutation({
     mutationFn: UserServiceApi.create,
-    onSuccess: async (data) => {
-      await queryClient.invalidateQueries({
-        queryKey: ["getUserById", data?.id],
-      });
-    },
   });
 };
 
 export const useUpdateUserMutation = () => {
   const queryClient = useQueryClient();
+  const { setUser } = useAuthStore();
 
   return useMutation({
     mutationFn: UserServiceApi.update,
     onSuccess: async (data) => {
-      await queryClient.invalidateQueries({
-        queryKey: ["getUserById", data?.id],
-      });
+      const user = await queryClient.fetchQuery(getAuthMeQueryConfig);
+      setUser(user);
     },
   });
 };

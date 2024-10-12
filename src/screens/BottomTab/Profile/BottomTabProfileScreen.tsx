@@ -54,8 +54,16 @@ export const BottomTabProfileScreen = () => {
     >
       <ScreenHeader title="Profil" icon="account" />
       <List title="Hesap Bilgileri">
-        <BottomTabProfileEditListItem title="İsim" value={user?.name} />
-        <BottomTabProfileEditListItem title="E-mail" value={user?.email} />
+        <BottomTabProfileEditListItem
+          title="İsim"
+          value={user?.name}
+          dtoKey="name"
+        />
+        <BottomTabProfileEditListItem
+          title="E-mail"
+          value={user?.email}
+          dtoKey="email"
+        />
 
         <ListItem onPress={onLogoutPress}>
           <ThemedText className="text-destructive text-sm">
