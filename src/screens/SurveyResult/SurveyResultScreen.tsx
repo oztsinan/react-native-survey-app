@@ -8,6 +8,8 @@ import { useRoute } from "@react-navigation/native";
 import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { ActivityIndicator, ScrollView, View } from "react-native";
+import LottieView from "lottie-react-native";
+import { Animations } from "@/assets/animations";
 
 export const SurveyResultScreen = () => {
   const { t } = useTranslation("SurveyModule");
@@ -42,11 +44,22 @@ export const SurveyResultScreen = () => {
   }
 
   return (
-    <ScrollView contentInsetAdjustmentBehavior="automatic" contentContainerClassName="p-page">
+    <ScrollView contentInsetAdjustmentBehavior="automatic" contentContainerClassName="p-page items-center">
+      <LottieView
+        autoPlay
+        style={{
+          width: 200,
+          height: 200,
+          marginLeft: -20, // animasyonun solu daha fazla boşluk bırakıyor, ortalamak için -20 verdim
+        }}
+        source={Animations.Survey}
+      />
+
       <List>
         <View className={"bg-green-500 p-3 px-4 rounded-lg"}>
           <ThemedText className="text-white">{data?.name}</ThemedText>
         </View>
+
         {questionsWithAnswers?.map((item, index) => (
           <ListItem className="gap-3" key={index}>
             <ThemedText className="text-sm font-bold">{item?.text}</ThemedText>
@@ -54,8 +67,7 @@ export const SurveyResultScreen = () => {
               {t("answer")}: {item?.answer}
             </ThemedText>
             <ThemedText className="text-sm">
-              {t("duration")}: {item?.answerCompletionTime}
-              {t("second")}
+              {t("duration")}: {item?.answerCompletionTime} {t("second")}
             </ThemedText>
           </ListItem>
         ))}

@@ -78,6 +78,8 @@ export const BottomTabSurveyListItem = ({ item }: BottomTabSurveyListItemProps) 
           useSurveyStore.persist.rehydrate();
           restartSurvey();
 
+          await new Promise((resolve) => setTimeout(resolve, 1000)); // state değişikliklerinin güvende olduğundan emin olmak için 1 saniye bekliyoruz
+
           navigation.navigate(Routes.SURVEY, {
             id: item?.id!,
           });

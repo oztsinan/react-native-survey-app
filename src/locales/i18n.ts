@@ -13,6 +13,8 @@ import SurveyModuleEN from "./en/SurveyModule.json";
 import SurveyModuleTR from "./tr/SurveyModule.json";
 import AuthModuleEN from "./en/AuthModule.json";
 import AuthModuleTR from "./tr/AuthModule.json";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { StorageKeys } from "@/constants/StorageKeys";
 
 export const resources = {
   en: {
@@ -34,9 +36,11 @@ export const resources = {
 const languageDetector: LanguageDetectorAsyncModule = {
   type: "languageDetector",
   async: true,
-  detect: (callback: (lng: string) => void) => {
-    const locale = getLocales()[0]?.languageCode || "en";
-    return callback(locale);
+  detect: async (callback: (lng: string | readonly string[] | undefined) => void) => {
+    const strogaLanguage = await AsyncStorage.getItem(StorageKeys.LANGUAGE);
+    const locale = strogaLanguage || getLocales()[0]?.languageCode || "en";
+    callback(locale);
+    return locale; // Ek olarak locale döndürmek gerekiyor
   },
 };
 

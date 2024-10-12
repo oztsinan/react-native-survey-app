@@ -6,5 +6,12 @@
   "logout": "Çıkış Yap",
   "aboutUs": "Hakkımızda",
   "privacyPolicy": "Gizlilik Politikası",
-  "termsAndConditions": "Kullanım Koşulları"
+  "termsAndConditions": "Kullanım Koşulları",
+  "theme": "Tema",
+  "language": "Dil",
+  "dark": "Koyu",
+  "light": "Açık",
+  "system": "Sistem",
+  "english": "İngilizce",
+  "turkish": "Türkçe"
 }

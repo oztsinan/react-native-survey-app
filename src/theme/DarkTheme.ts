@@ -1,9 +1,9 @@
 export const DarkTheme = {
-  primary: "#5552ff",
+  primary: "#7675cf",
   "primary-foreground": "#ffffff",
   foreground: "#ffffff",
   background: "#000000",
-  muted: "#1A1A1A",
+  muted: "#222222",
   "muted-foreground": "#B9B9B9",
   border: "#6D6D6D",
   destructive: "#d24646",

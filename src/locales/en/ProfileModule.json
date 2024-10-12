@@ -6,5 +6,12 @@
   "logout": "Logout",
   "aboutUs": "About Us",
   "privacyPolicy": "Privacy Policy",
-  "termsAndConditions": "Terms and Conditions"
+  "termsAndConditions": "Terms and Conditions",
+  "theme": "Theme",
+  "language": "Language",
+  "dark": "Dark",
+  "light": "Light",
+  "system": "System",
+  "english": "English",
+  "turkish": "Turkish"
 }
