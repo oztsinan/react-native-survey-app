@@ -1,5 +1,7 @@
 ﻿# React Native Survey App - Baykar Case
 
+![](https://github.com/oztsinan/react-native-survey-app/blob/master/screenshot/cover.png?raw=true)
+
 Bu projede **Expo** kullandım çünkü React Native'in resmi sayfasında artık Expo ile proje oluşturmak öneriliyor.
 
 State yönetimi için ise **Zustand** tercih ettim, çünkü Redux'a ihtiyaç duymadan basit ve modern bir state yönetimi sağlayabildim.
