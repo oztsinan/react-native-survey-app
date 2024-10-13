@@ -24,6 +24,7 @@ type FormValues = z.infer<typeof FormSchema>;
 
 export const AuthLoginView = ({ setIndex }: { setIndex: Dispatch<React.SetStateAction<number>> }) => {
   const { t } = useTranslation("AuthModule");
+
   const { mutateAsync: login } = useAuthLoginMutation();
 
   const form = useForm<FormValues>({

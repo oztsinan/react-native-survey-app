@@ -160,7 +160,7 @@ export const AuthRegisterView = ({ setIndex }: { setIndex: Dispatch<React.SetSta
         name="birthdate"
         render={({ field, fieldState }) => (
           <FormItem>
-            <FormLabel>{t("birthdate")}</FormLabel>
+            <FormLabel>{t("birthDate")}</FormLabel>
             <DatePickerField value={field?.value} onChange={field.onChange} error={fieldState.error?.message} />
             <FormDescription>{t("birthDateDescription")}</FormDescription>
           </FormItem>

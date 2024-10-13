@@ -16,6 +16,7 @@ import AuthModuleTR from "./tr/AuthModule.json";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { StorageKeys } from "@/constants/StorageKeys";
 
+export const defaultNS = "common";
 export const resources = {
   en: {
     common: commonEN,
@@ -48,7 +49,7 @@ i18n
   .use(languageDetector)
   .use(initReactI18next)
   .init({
-    defaultNS: "common",
+    defaultNS,
     fallbackLng: "en",
     compatibilityJSON: "v4",
     pluralSeparator: ".",

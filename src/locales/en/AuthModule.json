@@ -18,11 +18,11 @@
   "continue": "Continue",
   "successLoginToast": {
     "title": "Successful Login",
-    "description": "You have successfully logged in."
+    "message": "You have successfully logged in."
   },
   "successRegisterToast": {
     "title": "Successful Registration",
-    "description": "Your registration has been successfully created. Please click on the verification link sent to your email address to verify your account."
+    "message": "Your registration has been successfully created. Please click on the verification link sent to your email address to verify your account."
   },
   "registerPermissionTitle": "About Sensitive Data",
   "registerPermissionDescription": "In order to use our application, you need to approve the permissions below.",
