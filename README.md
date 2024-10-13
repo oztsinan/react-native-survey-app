@@ -19,7 +19,13 @@ Ayrıca stil yönetimi için en güncel çözüm olduğu için **NativeWind** ku
 
 ## 📋 Anket Cevaplama ve Depolama
 
-Anket sonuçlarının herhangi bir API endpoint'i olmadığından, bir **fake API isteği** gibi davranan bir metod yazıldı. Bu metod, **AsyncStorage** içinde her bir anketin **survey id**'lerine göre sonuçları işleyen bir algoritma içeriyor. Bu sayede, kullanıcıların anket cevapları **Zustand Persist** kullanılarak cihazın yerel depolama alanında saklanmaktadır. Böylece uygulama kapansa bile anket cevapları korunur ve tekrar erişilebilir.
+Anket sonuçlarının herhangi bir API endpoint'i olmadığından, bir **fake API isteği** gibi davranan bir metod yazıldı.
+
+Bu metod, **AsyncStorage** içinde her bir anketin **survey id**'lerine göre sonuçları işleyen bir algoritma içeriyor.
+
+Bu sayede, kullanıcıların anket cevapları **Zustand Persist** kullanılarak cihazın yerel depolama alanında saklanmaktadır.
+
+Böylece uygulama kapansa bile anket cevapları korunur ve tekrar erişilebilir.
 
 ## 👨🏻‍💻 Auth View
 
