@@ -23,13 +23,13 @@ export const SurveyQuestionLikertItem = ({ item }: { item: QuestionDTO }) => {
       <ThemedText className="text-center text-lg font-semibold">{item.text}</ThemedText>
       <View className="flex-row items-end h-[63px]">
         {likertOptions.map((option, index) => {
-          const isActive = answers[item?.id]?.value == option?.value;
+          const isActive = answers[item?.id]?.value === option?.value;
 
           return (
             <View
               key={index}
               style={{
-                borderColor: isActive ? option?.color : colorScheme == "light" ? "#f0f0f0" : "#1D1D1B",
+                borderColor: isActive ? option?.color : colorScheme === "light" ? "#f0f0f0" : "#1D1D1B",
               }}
               className={cn("border-b-2 px-1 py-2 transition-all duration-500", {
                 "pb-5": isActive,

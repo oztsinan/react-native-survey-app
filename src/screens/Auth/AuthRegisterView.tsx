@@ -152,6 +152,7 @@ export const AuthRegisterView = ({ setIndex }: { setIndex: Dispatch<React.SetSta
     );
   };
 
+  // eslint-disable-next-line
   const renderBirthdateField = () => {
     return (
       <Controller

@@ -15,6 +15,7 @@ export const SurveyScreen = () => {
     }
 
     return () => stop(); // component unmount olduğunda interval temizlenir
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [survey, completedDate]);
 
   return (

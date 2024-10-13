@@ -1,5 +1,5 @@
 import { BaseService } from "../BaseService";
-import { UserCheckEmailAvailabilityBody, UserCheckEmailAvailabilityDTO, UserCreateBody, UserDTO, UserUpdateBody } from "./User.types";
+import { UserCreateBody, UserDTO, UserUpdateBody } from "./User.types";
 
 class UserService {
   async getById(id: string): Promise<UserDTO> {

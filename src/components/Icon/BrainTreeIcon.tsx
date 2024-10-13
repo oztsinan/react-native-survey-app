@@ -1,4 +1,3 @@
-import { ClassValue } from "clsx";
 import * as React from "react";
 import { StyleProp, ViewStyle } from "react-native";
 import Svg, { G, Path, Defs, ClipPath, Rect } from "react-native-svg";

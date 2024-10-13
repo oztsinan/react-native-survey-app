@@ -21,7 +21,7 @@ const BottomTab = () => {
   const { colorScheme } = useColorScheme();
 
   const screenWidth = Dimensions.get("window").width;
-  const bottomTabBackgroundColor = colorScheme == "light" ? "#1d1d1b" : "#1E201E";
+  const bottomTabBackgroundColor = colorScheme === "light" ? "#1d1d1b" : "#1E201E";
 
   return (
     <Tab.Navigator
@@ -98,7 +98,7 @@ const HomeTabBarButton = ({ accessibilityState, children, onPress }: BottomTabBa
   const isFocused = accessibilityState?.selected;
   const { colors } = useTheme();
   const { colorScheme } = useColorScheme();
-  const bottomTabBackgroundColor = colorScheme == "light" ? "#1d1d1b" : "#1E201E";
+  const bottomTabBackgroundColor = colorScheme === "light" ? "#1d1d1b" : "#1E201E";
 
   return (
     <TouchableOpacity

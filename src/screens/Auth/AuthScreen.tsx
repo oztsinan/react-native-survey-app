@@ -1,6 +1,6 @@
 import { Assets } from "@/constants/Assets";
 import { Image } from "expo-image";
-import { StyleSheet, useWindowDimensions, View } from "react-native";
+import { StyleSheet, useWindowDimensions } from "react-native";
 import { BlurViewContainer } from "./components/BlurViewContainer";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { AuthLoginView } from "./AuthLoginView";

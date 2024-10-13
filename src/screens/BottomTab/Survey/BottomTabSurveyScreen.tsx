@@ -84,7 +84,7 @@ export const BottomTabSurveyScreen = () => {
       refetchAvailableSurveys();
       refetchStartedSurveys();
       refetchTimeoutSurveys();
-    }, []),
+    }, [refetchCompletedSurveys, refetchAvailableSurveys, refetchStartedSurveys, refetchTimeoutSurveys]),
   );
 
   if (isLoading) {

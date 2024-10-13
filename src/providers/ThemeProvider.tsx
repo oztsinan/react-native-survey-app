@@ -1,7 +1,7 @@
 import { View } from "react-native";
 import { DarkTheme as RNDarkTheme, DefaultTheme, NavigationContainer } from "@react-navigation/native";
 import { nativewindTheme } from "../theme/Themes";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect } from "react";
 import { useColorScheme } from "nativewind";
 import { LightTheme } from "../theme/LightTheme";
 import { DarkTheme } from "../theme/DarkTheme";
@@ -32,14 +32,14 @@ export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
     },
   };
 
-  const initalStorageKeys = async () => {
+  const initalStorageKeys = useCallback(async () => {
     const storageTheme = await AsyncStorage.getItem(StorageKeys.THEME);
     setColorScheme(storageTheme as "light" | "dark" | "system");
-  };
+  }, [setColorScheme]);
 
   useEffect(() => {
     initalStorageKeys();
-  }, []);
+  }, [initalStorageKeys]);
 
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
