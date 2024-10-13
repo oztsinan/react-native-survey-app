@@ -13,9 +13,9 @@ import { AuthScreenRoutes } from "@/constants/AuthScreenRoutes";
 import { useCreateUserMutation } from "@/api/User";
 import { DatePickerField } from "@/components/Field/DatePickerField";
 import { z } from "zod";
-import { Notifier, NotifierComponents } from "react-native-notifier";
 import { queryClient } from "@/providers/QueryProvider";
 import { useTranslation } from "react-i18next";
+import Toast from "@/utils/toast";
 
 const FormSchema = z
   .object({
@@ -182,13 +182,10 @@ export const AuthRegisterView = ({ setIndex }: { setIndex: Dispatch<React.SetSta
     setIndex(AuthScreenRoutes.REGISTER_PERMISSIONS);
 
     //kayıt başarılı ise toast göster
-    Notifier.showNotification({
+
+    Toast.success({
       title: t("successRegisterToast.title"),
-      description: t("successRegisterToast.message"),
-      Component: NotifierComponents.Alert,
-      componentProps: {
-        alertType: "success",
-      },
+      message: t("successRegisterToast.message"),
     });
   };
 

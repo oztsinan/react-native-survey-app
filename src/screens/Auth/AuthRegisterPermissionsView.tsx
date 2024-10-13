@@ -4,12 +4,12 @@ import { SwitchField } from "@/components/Field/SwitchField";
 import { ThemedButton } from "@/components/Themed/ThemedButton";
 import { ThemedText } from "@/components/Themed/ThemedText";
 import { queryClient } from "@/providers/QueryProvider";
+import Toast from "@/utils/toast";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Controller, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { ScrollView } from "react-native";
 import { View } from "react-native";
-import { Notifier, NotifierComponents } from "react-native-notifier";
 import { z } from "zod";
 
 const FormSchema = z.object({
@@ -38,13 +38,9 @@ export const AuthRegisterPermissionsView = () => {
     });
     await queryClient.setQueryData(["createdUser"], undefined); // kullanıcı bilgilerini sıfırla
 
-    Notifier.showNotification({
+    Toast.success({
       title: t("successLoginToast.title"),
-      description: t("successLoginToast.message"),
-      Component: NotifierComponents.Alert,
-      componentProps: {
-        alertType: "success",
-      },
+      message: t("successLoginToast.message"),
     });
   };
 

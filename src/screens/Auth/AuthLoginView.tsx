@@ -13,7 +13,7 @@ import { useAuthLoginMutation } from "@/api/Auth";
 import { Dispatch } from "react";
 import { AuthScreenRoutes } from "@/constants/AuthScreenRoutes";
 import { useTranslation } from "react-i18next";
-import { Notifier, NotifierComponents } from "react-native-notifier";
+import Toast from "@/utils/toast";
 
 const FormSchema = z.object({
   email: z.string().trim().min(1),
@@ -41,13 +41,9 @@ export const AuthLoginView = ({ setIndex }: { setIndex: Dispatch<React.SetStateA
   const onSubmit = async (data: FormValues) => {
     await login(data);
 
-    Notifier.showNotification({
+    Toast.success({
       title: t("successLoginToast.title"),
-      description: t("successLoginToast.message"),
-      Component: NotifierComponents.Alert,
-      componentProps: {
-        alertType: "success",
-      },
+      message: t("successLoginToast.message"),
     });
   };
 

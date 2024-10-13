@@ -1,5 +1,5 @@
 import i18next from "i18next";
-import { Notifier, NotifierComponents } from "react-native-notifier";
+import Toast from "./toast";
 
 export const onQueryError = (error: any) => {
   let errorMessage = "";
@@ -15,12 +15,8 @@ export const onQueryError = (error: any) => {
     errorMessage = "An unknown error occurred"; // diğer durumlarda varsayılan bir mesaj kullan
   }
 
-  Notifier.showNotification({
-    title: i18next.t("error"), // Başlık kısmına "Hata" kelimesini geçiyoruz
-    description: errorMessage, // Hata mesajını buraya geçiriyoruz
-    Component: NotifierComponents.Alert,
-    componentProps: {
-      alertType: "error",
-    },
+  Toast.error({
+    title: i18next.t("error"),
+    message: errorMessage,
   });
 };
