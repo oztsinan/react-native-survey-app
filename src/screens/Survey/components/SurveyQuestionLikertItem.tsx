@@ -2,11 +2,13 @@ import { QuestionDTO } from "@/api/Survey";
 import { ThemedText } from "@/components/Themed/ThemedText";
 import { useSurveyStore } from "@/store/SurveyStore";
 import { cn } from "@/utils/cn";
+import { useColorScheme } from "nativewind";
 import { useTranslation } from "react-i18next";
 import { TouchableOpacity, View } from "react-native";
 
 export const SurveyQuestionLikertItem = ({ item }: { item: QuestionDTO }) => {
   const { t } = useTranslation("SurveyModule");
+  const { colorScheme } = useColorScheme();
   const { answers, setAnswer } = useSurveyStore();
   const likertOptions = [
     { text: t("likertOptions.1"), value: 1, color: "#FF1D25" },
@@ -27,7 +29,7 @@ export const SurveyQuestionLikertItem = ({ item }: { item: QuestionDTO }) => {
             <View
               key={index}
               style={{
-                borderColor: isActive ? option?.color : "#f0f0f0",
+                borderColor: isActive ? option?.color : colorScheme == "light" ? "#f0f0f0" : "#1D1D1B",
               }}
               className={cn("border-b-2 px-1 py-2 transition-all duration-500", {
                 "pb-5": isActive,

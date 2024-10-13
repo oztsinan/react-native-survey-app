@@ -3,10 +3,11 @@ import { ThemedButton } from "@/components/Themed/ThemedButton";
 import { ThemedText } from "@/components/Themed/ThemedText";
 import { useTheme } from "@/hook/useTheme";
 import { useSurveyStore } from "@/store/SurveyStore";
-import { cn } from "@/utils/cn";
+import { useColorScheme } from "nativewind";
 import { View } from "react-native";
 
 export const SurveyQuestionSingleSelectItem = ({ item }: { item: QuestionDTO }) => {
+  const { colorScheme } = useColorScheme();
   const { colors } = useTheme();
   const { answers, setAnswer } = useSurveyStore();
 
@@ -20,15 +21,11 @@ export const SurveyQuestionSingleSelectItem = ({ item }: { item: QuestionDTO }) 
           return (
             <ThemedButton
               key={index}
-              className={cn({
-                "bg-[#efefff]": !isActive,
-                "bg-primary": isActive,
-              })}
               style={{
-                backgroundColor: isActive ? colors?.primary : "#efefff",
+                backgroundColor: isActive ? colors?.primary : colorScheme === "light" ? "#efefff" : "#1D1D1B",
               }}
               textStyle={{
-                color: isActive ? colors?.["primary-foreground"] : "#1D1D1B",
+                color: isActive ? colors?.["primary-foreground"] : colorScheme === "light" ? "#1D1D1B" : "#efefff",
                 opacity: isActive ? 1 : 0.4,
               }}
               onPress={() => setAnswer(item?.id, option?.id)}
