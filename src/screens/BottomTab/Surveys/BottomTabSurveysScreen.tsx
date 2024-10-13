@@ -1,5 +1,5 @@
 import { ActivityIndicator, ScrollView, View } from "react-native";
-import { BottomTabSurveyStatistics } from "./components/BottomTabSurveyStatistics";
+import { BottomTabSurveysStatistics } from "./components/BottomTabSurveysStatistics";
 import { ThemedText } from "@/components/Themed/ThemedText";
 import { useGetAvailableSurveysQuery, useGetCompletedSurveysQuery, useGetStartedSurveysQuery, useGetTimeoutSurveysQuery } from "@/api/Survey";
 import { List } from "@/components/List/List";
@@ -11,7 +11,7 @@ import { useFocusEffect } from "@react-navigation/native";
 import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 
-export const BottomTabSurveyScreen = () => {
+export const BottomTabSurveysScreen = () => {
   const { t } = useTranslation("SurveyModule");
   const { colors } = useTheme();
   const { data: completedSurveys, isLoading: completedSurveysLoading, refetch: refetchCompletedSurveys } = useGetCompletedSurveysQuery();
@@ -93,7 +93,7 @@ export const BottomTabSurveyScreen = () => {
 
   return (
     <ScrollView contentContainerClassName="p-page gap-page items-center" contentInsetAdjustmentBehavior="automatic">
-      <BottomTabSurveyStatistics data={completedSurveys} />
+      <BottomTabSurveysStatistics data={completedSurveys} />
 
       {renderAvailableSurveys()}
       {renderStartedSurveys()}

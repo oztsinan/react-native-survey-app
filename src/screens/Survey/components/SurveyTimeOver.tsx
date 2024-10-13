@@ -9,7 +9,12 @@ import { useTranslation } from "react-i18next";
 export const SurveyTimeOver = () => {
   const { t } = useTranslation("SurveyModule");
   const { colors } = useTheme();
-  const { restartSurvey } = useSurveyStore();
+  const { restartSurvey, start } = useSurveyStore();
+
+  const onRestartSurvey = () => {
+    restartSurvey();
+    start();
+  };
 
   return (
     <View className="flex-1 justify-center items-center">
@@ -18,7 +23,7 @@ export const SurveyTimeOver = () => {
       <ThemedText className="text-xl font-bold">{t("surveyTimeOver")}</ThemedText>
       <ThemedText className="text-sm">{t("surveyTimeOverDescription")}</ThemedText>
 
-      <ThemedButton onPress={restartSurvey} className="mt-5">
+      <ThemedButton onPress={onRestartSurvey} className="mt-5">
         {t("restartSurveyAlert.title")}
       </ThemedButton>
     </View>

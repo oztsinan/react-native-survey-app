@@ -16,7 +16,7 @@ export type RootStackParams = {
 
 export type BottomTabParams = {
   [Routes.BOTTOM_TAB_HOME]: undefined;
-  [Routes.BOTTOM_TAB_SURVEY]: undefined;
+  [Routes.BOTTOM_TAB_SURVEYS]: undefined;
   [Routes.BOTTOM_TAB_PROFILE]: undefined;
 };
 

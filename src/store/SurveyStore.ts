@@ -82,7 +82,7 @@ export const useSurveyStore = create<SurveyStore>()(
           answers: {},
         });
         get().setSurvey(surveyId);
-        get().start();
+        // get().start(); // ekran mount olduğunda başlatıldığı için bir bug oluşuyordu, bu yüzden start fonksiyonunu çağırmıyoruz
       },
 
       // Question states

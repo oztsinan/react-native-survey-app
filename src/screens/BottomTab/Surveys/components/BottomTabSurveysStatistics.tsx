@@ -5,7 +5,7 @@ import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { View } from "react-native";
 
-export const BottomTabSurveyStatistics = ({ data }: { data: SurveyDTO[] | undefined }) => {
+export const BottomTabSurveysStatistics = ({ data }: { data: SurveyDTO[] | undefined }) => {
   const { t } = useTranslation("SurveyModule");
   const { t: tCommon } = useTranslation("common");
   const sumCompletedSurveys = data?.length;

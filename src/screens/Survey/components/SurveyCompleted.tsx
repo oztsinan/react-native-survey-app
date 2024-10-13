@@ -12,12 +12,17 @@ export const SurveyCompleted = () => {
   const navigation = useTypedNavigation<RootStackParams>();
 
   const { t } = useTranslation("SurveyModule");
-  const { survey, restartSurvey } = useSurveyStore();
+  const { survey, restartSurvey, start } = useSurveyStore();
 
   const onResultPress = () => {
     navigation.navigate(Routes.SURVEY_RESULT, {
       id: survey?.id!,
     });
+  };
+
+  const onRestartSurvey = () => {
+    restartSurvey();
+    start();
   };
 
   return (
@@ -27,7 +32,7 @@ export const SurveyCompleted = () => {
       <ThemedText className="text-sm">{t("thankYou")}</ThemedText>
 
       <View className="flex-col items-center gap-2">
-        <ThemedButton onPress={restartSurvey} className="mt-5">
+        <ThemedButton onPress={onRestartSurvey} className="mt-5">
           {t("restartSurveyAlert.title")}
         </ThemedButton>
 

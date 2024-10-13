@@ -36,7 +36,7 @@ export const BottomTabHomeScreen = () => {
         {t("hello")} <ThemedText className="text-lg text-primary">{user?.name}</ThemedText>
       </ThemedText>
 
-      <ThemedButton onPress={() => navigation.navigate(Routes.BOTTOM_TAB_SURVEY)} className="px-7">
+      <ThemedButton onPress={() => navigation.navigate(Routes.BOTTOM_TAB_SURVEYS)} className="px-7">
         {t("startSurvey")}
       </ThemedButton>
     </ScrollView>

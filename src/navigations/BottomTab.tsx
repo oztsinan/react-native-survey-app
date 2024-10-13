@@ -4,7 +4,7 @@ import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Routes } from "./Routes";
 import { BottomTabHomeScreen } from "@/screens/BottomTab/Home/BottomTabHomeScreen";
-import { BottomTabSurveyScreen } from "@/screens/BottomTab/Survey/BottomTabSurveyScreen";
+import { BottomTabSurveysScreen } from "@/screens/BottomTab/Surveys/BottomTabSurveysScreen";
 import { BottomTabProfileScreen } from "@/screens/BottomTab/Profile/BottomTabProfileScreen";
 import { BottomTabParams } from "./RootStackParams";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
@@ -48,10 +48,10 @@ const BottomTab = () => {
       }}
     >
       <Tab.Screen
-        name={Routes.BOTTOM_TAB_SURVEY}
-        component={BottomTabSurveyScreen}
+        name={Routes.BOTTOM_TAB_SURVEYS}
+        component={BottomTabSurveysScreen}
         options={{
-          title: "Survey",
+          title: i18next.t("SurveyModule:surveys"),
           tabBarLabel: (props) => <TabBarLabel {...props} />,
           tabBarIcon: ({ color }) => <SimpleLineIcons name="graph" size={25} color={color} />,
         }}
