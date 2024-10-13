@@ -1,5 +1,5 @@
 import { ThemedText } from "@/components/Themed/ThemedText";
-import { View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { BrainTreeIcon } from "@/components/Icon/BrainTreeIcon";
 import { ThemedButton } from "@/components/Themed/ThemedButton";
 import { useSurveyStore } from "@/store/SurveyStore";
@@ -27,7 +27,7 @@ export const SurveyCompleted = () => {
 
   return (
     <View className="flex-1 justify-center items-center">
-      <BrainTreeIcon style={{ marginBottom: 20 }} />
+      <BrainTreeIcon style={styles.icon} />
       <ThemedText className="text-xl font-bold">{t("surveyCompleted")}</ThemedText>
       <ThemedText className="text-sm">{t("thankYou")}</ThemedText>
 
@@ -43,3 +43,9 @@ export const SurveyCompleted = () => {
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  icon: {
+    marginBottom: 20,
+  },
+});

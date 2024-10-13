@@ -7,7 +7,7 @@ import { Routes } from "@/navigations/Routes";
 import { useRoute } from "@react-navigation/native";
 import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
-import { ActivityIndicator, ScrollView, View } from "react-native";
+import { ActivityIndicator, ScrollView, StyleSheet, View } from "react-native";
 import LottieView from "lottie-react-native";
 import { Animations } from "@/assets/animations";
 
@@ -45,15 +45,7 @@ export const SurveyResultScreen = () => {
 
   return (
     <ScrollView contentInsetAdjustmentBehavior="automatic" contentContainerClassName="p-page items-center">
-      <LottieView
-        autoPlay
-        style={{
-          width: 200,
-          height: 200,
-          marginLeft: -20, // animasyonun solu daha fazla boşluk bırakıyor, ortalamak için -20 verdim
-        }}
-        source={Animations.Survey}
-      />
+      <LottieView autoPlay style={styles.animation} source={Animations.Survey} />
 
       <List>
         <View className={"bg-green-500 p-3 px-4 rounded-lg"}>
@@ -75,3 +67,11 @@ export const SurveyResultScreen = () => {
     </ScrollView>
   );
 };
+
+const styles = StyleSheet.create({
+  animation: {
+    width: 200,
+    height: 200,
+    marginLeft: -20, // animasyonun solu daha fazla boşluk bırakıyor, ortalamak için -20 verdim
+  },
+});

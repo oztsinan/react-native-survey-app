@@ -1,5 +1,5 @@
 import { useTheme } from "@/hook/useTheme";
-import { Switch, View } from "react-native";
+import { StyleSheet, Switch, View } from "react-native";
 import { ThemedText } from "../Themed/ThemedText";
 
 type SwitchFieldProps = {
@@ -19,16 +19,16 @@ export const SwitchField = (props: SwitchFieldProps) => {
         ios_backgroundColor="#B1B0FF"
         onValueChange={onChange}
         value={value}
-        style={{
-          transform: [
-            {
-              scale: 0.7,
-            },
-          ],
-        }}
+        style={styles.switch}
       />
 
       <ThemedText className="flex-1 font-semibold text-sm">{text}</ThemedText>
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  switch: {
+    transform: [{ scale: 0.7 }],
+  },
+});

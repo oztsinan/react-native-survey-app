@@ -3,6 +3,7 @@ import { ClassValue } from "clsx";
 import { FieldContainer } from "./FieldContainer";
 import React, { forwardRef } from "react";
 import { BaseDateTimePicker } from "../Base/BaseDateTimePicker";
+import { StyleSheet } from "react-native";
 
 type DatePickerFieldProps = {
   value: string | undefined | null;
@@ -24,16 +25,24 @@ export const DatePickerField = forwardRef<HTMLInputElement, DatePickerFieldProps
           minimumDate={minimumDate}
           maximumDate={maximumDate}
           onChange={(e, value) => value && onChange(value?.toISOString())}
-          style={{
-            position: "absolute",
-            left: -5,
-            transform: [{ scale: 0.9 }],
-            opacity: value ? 1 : 0.5,
-          }}
+          style={[
+            styles.datePicker,
+            {
+              opacity: value ? 1 : 0.5,
+            },
+          ]}
         />
       </FieldContainer>
     );
   },
 );
+
+const styles = StyleSheet.create({
+  datePicker: {
+    position: "absolute",
+    left: -5,
+    transform: [{ scale: 0.9 }],
+  },
+});
 
 DatePickerField.displayName = "DatePickerField";

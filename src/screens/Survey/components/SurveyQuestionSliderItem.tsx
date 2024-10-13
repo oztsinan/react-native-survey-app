@@ -8,6 +8,7 @@ import { hexToRgba } from "@/utils/color";
 import { useMemo } from "react";
 import Entypo from "@expo/vector-icons/Entypo";
 import { useTranslation } from "react-i18next";
+import { StyleSheet } from "react-native";
 
 type EntypoName = keyof typeof Entypo.glyphMap; // Entypo isimlerini al
 
@@ -51,7 +52,7 @@ export const SurveyQuestionSliderItem = ({ item }: { item: QuestionDTO }) => {
       <Entypo name={emojiName} size={150} color={colors.primary} />
 
       <Slider
-        style={{ width: 200, height: 40 }}
+        style={styles.slider}
         minimumValue={item?.minValue}
         maximumValue={item?.maxValue}
         thumbTintColor={colors.primary}
@@ -65,3 +66,10 @@ export const SurveyQuestionSliderItem = ({ item }: { item: QuestionDTO }) => {
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  slider: {
+    width: 200,
+    height: 40,
+  },
+});

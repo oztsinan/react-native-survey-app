@@ -1,6 +1,6 @@
 import { Assets } from "@/constants/Assets";
 import { Image } from "expo-image";
-import { ScrollView, View } from "react-native";
+import { ScrollView, StyleSheet, View } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { ThemedText } from "@/components/Themed/ThemedText";
 import { ThemedButton } from "@/components/Themed/ThemedButton";
@@ -20,16 +20,8 @@ export const BottomTabHomeScreen = () => {
   return (
     <ScrollView contentContainerClassName="flex items-center gap-10" bounces={false}>
       <View className="w-full h-[500px]">
-        <Image source={Assets.images.background} contentFit="cover" contentPosition="top" style={{ width: "100%", height: "100%" }} />
-
-        <LinearGradient
-          colors={["transparent", "transparent", colors?.background]}
-          style={{
-            width: "100%",
-            height: "100%",
-            position: "absolute",
-          }}
-        />
+        <Image source={Assets.images.background} contentFit="cover" contentPosition="top" style={styles.image} />
+        <LinearGradient colors={["transparent", "transparent", colors?.background]} style={styles.gradient} />
       </View>
 
       <ThemedText className="text-lg">
@@ -42,3 +34,15 @@ export const BottomTabHomeScreen = () => {
     </ScrollView>
   );
 };
+
+const styles = StyleSheet.create({
+  image: {
+    width: "100%",
+    height: "100%",
+  },
+  gradient: {
+    width: "100%",
+    height: "100%",
+    position: "absolute",
+  },
+});

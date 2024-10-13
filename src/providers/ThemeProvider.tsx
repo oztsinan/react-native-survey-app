@@ -10,6 +10,7 @@ import { StatusBar } from "expo-status-bar";
 import { navigationRef } from "@/utils/navigation";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { StorageKeys } from "@/constants/StorageKeys";
+import { StyleSheet } from "react-native";
 
 export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
   const { colorScheme, setColorScheme } = useColorScheme();
@@ -42,7 +43,7 @@ export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
   }, [initalStorageKeys]);
 
   return (
-    <GestureHandlerRootView style={{ flex: 1 }}>
+    <GestureHandlerRootView style={styles.container}>
       <NavigationContainer ref={navigationRef} theme={colorScheme === "dark" ? DarkValue : LightValue}>
         <View
           // nativeWind tema değişikliklerini sağlayan değişkenler
@@ -56,3 +57,9 @@ export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
     </GestureHandlerRootView>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+});
