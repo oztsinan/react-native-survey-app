@@ -4,6 +4,7 @@ import { useSurveyStore } from "@/store/SurveyStore";
 import { View } from "react-native";
 import { SurveyFooter } from "./components/SurveyFooter";
 import { SurveyQuestions } from "./components/SurveyQuestions";
+import { StatusBar } from "expo-status-bar";
 
 export const SurveyScreen = () => {
   const { survey, completedDate, start, stop } = useSurveyStore();
@@ -21,6 +22,7 @@ export const SurveyScreen = () => {
       <SurveyHeader />
       <SurveyQuestions />
       <SurveyFooter />
+      <StatusBar style="light" />
     </View>
   );
 };
