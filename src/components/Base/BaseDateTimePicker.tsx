@@ -15,27 +15,14 @@ type BaseDateTimePickerProps = {
   style?: any;
 };
 
-export const BaseDateTimePicker = ({
-  value,
-  mode,
-  display = "compact",
-  onChange,
-  maximumDate,
-  minimumDate,
-  style,
-}: BaseDateTimePickerProps) => {
+export const BaseDateTimePicker = ({ value, mode, display = "compact", onChange, maximumDate, minimumDate, style }: BaseDateTimePickerProps) => {
   const [isOpen, setIsOpen] = React.useState(false);
 
   if (isAndroid) {
     return (
       <View>
-        <TouchableOpacity
-          className="bg-systemBackground rounded p-2.5"
-          onPress={() => setIsOpen(!isOpen)}
-        >
-          <ThemedText>
-            {value ? baseFormatDate(value, "dd MMMM yyyy") : "Tarih Seçiniz"}
-          </ThemedText>
+        <TouchableOpacity className="bg-systemBackground rounded p-2.5" onPress={() => setIsOpen(!isOpen)}>
+          <ThemedText>{value ? baseFormatDate(value, "dd MMMM yyyy") : "Tarih Seçiniz"}</ThemedText>
         </TouchableOpacity>
         {isOpen && (
           <DateTimePicker

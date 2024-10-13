@@ -3,11 +3,7 @@ import { View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { HandleIndicator } from "./HandleIndicator";
 
-export const BlurViewContainer = ({
-  children,
-}: {
-  children: React.ReactNode;
-}) => {
+export const BlurViewContainer = ({ children }: { children: React.ReactNode }) => {
   const { bottom = 20 } = useSafeAreaInsets();
 
   return (

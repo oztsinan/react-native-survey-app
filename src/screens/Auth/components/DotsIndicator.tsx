@@ -1,13 +1,7 @@
 import { cn } from "@/utils/cn";
 import { View } from "react-native";
 
-export const DotsIndicator = ({
-  count = 3,
-  activeIndex = 0,
-}: {
-  count?: number;
-  activeIndex?: number;
-}) => {
+export const DotsIndicator = ({ count = 3, activeIndex = 0 }: { count?: number; activeIndex?: number }) => {
   return (
     <View className="flex-row gap-1 mx-auto">
       {Array(count)

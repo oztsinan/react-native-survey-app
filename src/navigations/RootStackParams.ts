@@ -20,5 +20,4 @@ export type BottomTabParams = {
   [Routes.BOTTOM_TAB_PROFILE]: undefined;
 };
 
-export type RootStackScreenProps<T extends keyof RootStackParams> =
-  NativeStackScreenProps<RootStackParams, T>;
+export type RootStackScreenProps<T extends keyof RootStackParams> = NativeStackScreenProps<RootStackParams, T>;

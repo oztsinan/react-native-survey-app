@@ -1,13 +1,8 @@
-import {
-  ActivityIndicator,
-  StyleProp,
-  TextStyle,
-  TouchableOpacity,
-  TouchableOpacityProps,
-} from "react-native";
+import { ActivityIndicator, StyleProp, TextStyle, TouchableOpacity, TouchableOpacityProps } from "react-native";
 import { ThemedText } from "./ThemedText";
 import { cn } from "@/utils/cn";
 import { ClassValue } from "clsx";
+import { useColorScheme } from "nativewind";
 
 type ThemedButtonProps = TouchableOpacityProps & {
   children: string | React.ReactNode;
@@ -16,23 +11,16 @@ type ThemedButtonProps = TouchableOpacityProps & {
   textStyle?: StyleProp<TextStyle>;
 };
 
-export const ThemedButton = ({
-  children,
-  className,
-  textClassName,
-  isLoading,
-  textStyle,
-  ...props
-}: ThemedButtonProps) => {
+export const ThemedButton = ({ children, className, textClassName, isLoading, textStyle, ...props }: ThemedButtonProps) => {
+  const { colorScheme } = useColorScheme();
+
   const renderContent = () => {
     if (typeof children === "string") {
       return (
         <ThemedText
           className={cn("font-semibold", textClassName, {
-            "text-[#1D1D1B] opacity-40":
-              props?.disabled && !(textStyle as any)?.color,
-            "text-primary-foreground":
-              !props?.disabled && !(textStyle as any)?.color,
+            "text-[#1D1D1B] opacity-40": props?.disabled && !(textStyle as any)?.color,
+            "text-primary-foreground": !props?.disabled && !(textStyle as any)?.color,
             "opacity-40": isLoading,
           })}
           style={textStyle}
@@ -49,15 +37,11 @@ export const ThemedButton = ({
     <TouchableOpacity
       {...props}
       disabled={isLoading || props?.disabled}
-      className={cn(
-        " px-5 rounded-full flex-row items-center gap-2 h-[40px]",
-        className,
-        {
-          "bg-[#efefff]": props?.disabled,
-          "bg-primary":
-            !props?.disabled && !(props.style as any)?.backgroundColor, // style içinde backgroundColor varsa primary rengini kullanma
-        }
-      )}
+      className={cn(" px-5 rounded-full flex-row items-center gap-2 h-[40px]", className, {
+        "bg-[#efefff]": props?.disabled && colorScheme === "light",
+        "bg-[#1D1D1B]": props?.disabled && colorScheme === "dark",
+        "bg-primary": !props?.disabled && !(props.style as any)?.backgroundColor, // style içinde backgroundColor varsa primary rengini kullanma
+      })}
       style={props?.style}
     >
       {isLoading && <ActivityIndicator color="#fff" />}

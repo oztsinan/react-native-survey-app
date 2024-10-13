@@ -14,9 +14,7 @@ export const ScreenHeader = ({ title, icon }: ScreenHeaderProps) => {
   return (
     <View className="flex-row items-center gap-1">
       <MaterialCommunityIcons name={icon} size={17} color={colors?.primary} />
-      <ThemedText className="font-bold text-primary">
-        {title?.toLocaleUpperCase()}
-      </ThemedText>
+      <ThemedText className="font-bold text-primary">{title?.toLocaleUpperCase()}</ThemedText>
     </View>
   );
 };

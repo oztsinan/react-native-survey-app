@@ -18,7 +18,7 @@ BaseService.interceptors.request.use(
   },
   (error) => {
     return Promise.reject(error);
-  }
+  },
 );
 
 BaseService.interceptors.response.use(
@@ -30,5 +30,5 @@ BaseService.interceptors.response.use(
       await AsyncStorage.removeItem(StorageKeys.ACCESS_TOKEN);
     }
     return Promise.reject(error);
-  }
+  },
 );

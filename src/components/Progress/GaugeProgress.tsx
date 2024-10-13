@@ -13,13 +13,7 @@ interface GaugeProgressProps {
   label?: string;
 }
 
-export const GaugeProgress = ({
-  size,
-  strokeWidth,
-  progress,
-  ticks = 7,
-  label,
-}: GaugeProgressProps) => {
+export const GaugeProgress = ({ size, strokeWidth, progress, ticks = 7, label }: GaugeProgressProps) => {
   const { colors } = useTheme();
   const radius = (size - strokeWidth) / 2;
   const circumference = Math.PI * radius * 1.5; // 240 derece yay için çarpan 1.5
@@ -36,34 +30,17 @@ export const GaugeProgress = ({
       const angle = -170 + tickSpacing * i; // -120 derece ile başla, daha geniş açı
       const x1 = size / 2 + radius * Math.cos((angle * Math.PI) / 180);
       const y1 = size / 2 + radius * Math.sin((angle * Math.PI) / 180);
-      const x2 =
-        size / 2 + (radius - strokeWidth) * Math.cos((angle * Math.PI) / 180);
-      const y2 =
-        size / 2 + (radius - strokeWidth) * Math.sin((angle * Math.PI) / 180);
+      const x2 = size / 2 + (radius - strokeWidth) * Math.cos((angle * Math.PI) / 180);
+      const y2 = size / 2 + (radius - strokeWidth) * Math.sin((angle * Math.PI) / 180);
 
-      lines.push(
-        <Line
-          key={i}
-          x1={x1}
-          y1={y1}
-          x2={x2}
-          y2={y2}
-          stroke={hexToRgba(colors?.primary, 20)}
-          strokeWidth="2"
-          strokeLinecap="round"
-        />
-      );
+      lines.push(<Line key={i} x1={x1} y1={y1} x2={x2} y2={y2} stroke={hexToRgba(colors?.primary, 20)} strokeWidth="2" strokeLinecap="round" />);
     }
     return lines;
   };
 
   return (
     <View className="relative">
-      <Svg
-        width={size}
-        height={size / 1.5}
-        viewBox={`0 0 ${size} ${size / 1.5}`}
-      >
+      <Svg width={size} height={size / 1.5} viewBox={`0 0 ${size} ${size / 1.5}`}>
         {/* Çentikleri Çiz */}
         <G strokeLinecap="round">{renderTicks()}</G>
         <G rotation="120" origin={`${size / 2}, ${size / 2}`}>

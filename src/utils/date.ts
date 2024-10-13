@@ -1,10 +1,7 @@
 import { formatDate } from "date-fns";
 import { tr } from "date-fns/locale";
 
-export const baseFormatDate = (
-  dateValue?: string | Date,
-  format: string = "dd/MM/yyyy HH:mm"
-) => {
+export const baseFormatDate = (dateValue?: string | Date, format: string = "dd/MM/yyyy HH:mm") => {
   if (!dateValue) return "";
 
   let date = new Date();

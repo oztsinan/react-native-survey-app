@@ -5,13 +5,7 @@ import { SurveyTimeOver } from "./SurveyTimeOver";
 import { SurveyCompleted } from "./SurveyCompleted";
 
 export const SurveyQuestions = () => {
-  const {
-    survey,
-    questionsListRef,
-    remainingTime,
-    completedDate,
-    activeQuestionIndex,
-  } = useSurveyStore();
+  const { survey, questionsListRef, remainingTime, completedDate, activeQuestionIndex } = useSurveyStore();
   const isTimeOver = remainingTime === 0;
 
   if (!survey?.id) {

@@ -14,9 +14,7 @@ class SurveyService {
     if (surveyPersist) {
       const parsedSurveyPersist = JSON.parse(surveyPersist);
 
-      const isTimeout =
-        parsedSurveyPersist?.state?.remainingTime !== undefined &&
-        parsedSurveyPersist?.state?.remainingTime === 0;
+      const isTimeout = parsedSurveyPersist?.state?.remainingTime !== undefined && parsedSurveyPersist?.state?.remainingTime === 0;
 
       return {
         ...survey,
@@ -44,22 +42,16 @@ class SurveyService {
       .filter(([key, value]) => {
         const parsedValue = JSON.parse(value as any);
         // tamamlanmamış ve timeout olmayan anketleri filtrele
-        const isTimeout =
-          parsedValue.state.remainingTime !== undefined &&
-          parsedValue.state.remainingTime === 0;
+        const isTimeout = parsedValue.state.remainingTime !== undefined && parsedValue.state.remainingTime === 0;
 
         return !parsedValue.state.completedDate || !isTimeout;
       })
       .map(([key]) => key.replace("survey-store-", ""));
 
-    const unpersistedSurveyIds = Surveys.filter(
-      (survey) => !filteredSurveyIds.includes(survey.id)
-    ).map((survey) => survey.id);
+    const unpersistedSurveyIds = Surveys.filter((survey) => !filteredSurveyIds.includes(survey.id)).map((survey) => survey.id);
 
     // persist edilmemişleri varsayılan değerlerle ekle
-    const unpersistedSurveys = Surveys.filter((survey) =>
-      unpersistedSurveyIds.includes(survey.id)
-    ).map((survey) => ({
+    const unpersistedSurveys = Surveys.filter((survey) => unpersistedSurveyIds.includes(survey.id)).map((survey) => ({
       ...survey,
       completedDate: undefined,
       isTimeout: false,
@@ -79,14 +71,8 @@ class SurveyService {
         const parsedValue = JSON.parse(value as any);
         // anketin başlatılmış ama tamamlanmamış olduğunu kontrol et (completedDate boş olmalı)
         // aynı zamanda timeout olmamış olmalı
-        const isTimeout =
-          parsedValue.state.remainingTime !== undefined &&
-          parsedValue.state.remainingTime === 0;
-        return (
-          !!parsedValue.state.answers &&
-          !parsedValue.state.completedDate &&
-          !isTimeout
-        );
+        const isTimeout = parsedValue.state.remainingTime !== undefined && parsedValue.state.remainingTime === 0;
+        return !!parsedValue.state.answers && !parsedValue.state.completedDate && !isTimeout;
       })
       .map(([key, value]) => {
         const id = key.replace("survey-store-", "");
@@ -121,9 +107,7 @@ class SurveyService {
         const survey = Surveys.find((survey) => survey.id === id);
         const parsedValue = JSON.parse(value as any);
 
-        const isTimeout =
-          parsedValue.state.remainingTime !== undefined &&
-          parsedValue.state.remainingTime === 0;
+        const isTimeout = parsedValue.state.remainingTime !== undefined && parsedValue.state.remainingTime === 0;
 
         return {
           ...survey,
@@ -146,9 +130,7 @@ class SurveyService {
       .filter(([key, value]) => {
         const parsedValue = JSON.parse(value as any);
         // sadece timeout olmuş anketleri döndür
-        const isTimeout =
-          parsedValue.state.remainingTime !== undefined &&
-          parsedValue.state.remainingTime === 0;
+        const isTimeout = parsedValue.state.remainingTime !== undefined && parsedValue.state.remainingTime === 0;
         return isTimeout;
       })
       .map(([key, value]) => {

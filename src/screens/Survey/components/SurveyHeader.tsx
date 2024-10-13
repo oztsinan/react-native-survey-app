@@ -13,8 +13,7 @@ export const SurveyHeader = () => {
   const { top = 20 } = useSafeAreaInsets();
   const { survey, remainingTime } = useSurveyStore();
 
-  const gaugeProgress =
-    ((survey?.duration! - remainingTime) / survey?.duration!) * 100;
+  const gaugeProgress = ((survey?.duration! - remainingTime) / survey?.duration!) * 100;
 
   return (
     <View
@@ -25,12 +24,7 @@ export const SurveyHeader = () => {
     >
       <View className="flex flex-row justify-between">
         <HomeButton />
-        <GaugeProgress
-          size={100}
-          strokeWidth={10}
-          progress={gaugeProgress}
-          label={convertSecondsToTime(remainingTime)}
-        />
+        <GaugeProgress size={100} strokeWidth={10} progress={gaugeProgress} label={convertSecondsToTime(remainingTime)} />
       </View>
 
       <QuestionInformation />
@@ -43,10 +37,7 @@ const HomeButton = () => {
   const { colors } = useTheme();
 
   return (
-    <TouchableOpacity
-      onPress={() => navigation.goBack()}
-      className="bg-white size-9 justify-center items-center rounded-full"
-    >
+    <TouchableOpacity onPress={() => navigation.goBack()} className="bg-white size-9 justify-center items-center rounded-full">
       <Entypo name="home" size={18} color={colors?.primary} />
     </TouchableOpacity>
   );
@@ -59,9 +50,7 @@ const QuestionInformation = () => {
 
   return (
     <View>
-      <ThemedText className="text-white text-sm font-bold">
-        {survey?.name}
-      </ThemedText>
+      <ThemedText className="text-white text-sm font-bold">{survey?.name}</ThemedText>
 
       <View className="flex-row items-center gap-2">
         <View className="h-[6px] bg-white/20 rounded-3xl flex-1 overflow-hidden">
@@ -74,10 +63,7 @@ const QuestionInformation = () => {
         </View>
 
         <ThemedText className="text-white text-sm">
-          {activeQuestionCount}/
-          <ThemedText className="text-xs text-white font-light">
-            {survey?.questions.length}
-          </ThemedText>
+          {activeQuestionCount}/<ThemedText className="text-xs text-white font-light">{survey?.questions.length}</ThemedText>
         </ThemedText>
       </View>
     </View>

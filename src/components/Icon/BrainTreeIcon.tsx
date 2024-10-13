@@ -69,13 +69,7 @@ export const BrainTreeIcon = ({ style }: { style?: StyleProp<ViewStyle> }) => (
         strokeMiterlimit={10}
         strokeLinecap="round"
       />
-      <Path
-        d="M56.7991 37.7793V103.71"
-        stroke="#0300A3"
-        strokeWidth={2}
-        strokeMiterlimit={10}
-        strokeLinecap="round"
-      />
+      <Path d="M56.7991 37.7793V103.71" stroke="#0300A3" strokeWidth={2} strokeMiterlimit={10} strokeLinecap="round" />
       <Path
         d="M38.6698 76.9446C38.6698 76.9446 38.6277 76.869 38.6025 76.827C35.7042 76.7346 32.8059 78.3056 31.3021 80.7839C29.7983 83.2622 29.7479 86.5553 31.1677 89.084C31.2433 89.042 31.3357 89 31.4197 88.9496C33.2511 84.7155 35.2505 80.1958 38.6698 76.9362V76.9446Z"
         fill="#0300A3"
@@ -173,13 +167,7 @@ export const BrainTreeIcon = ({ style }: { style?: StyleProp<ViewStyle> }) => (
         strokeMiterlimit={10}
         strokeLinecap="round"
       />
-      <Path
-        d="M62.2009 37.7793V103.71"
-        stroke="#0300A3"
-        strokeWidth={2}
-        strokeMiterlimit={10}
-        strokeLinecap="round"
-      />
+      <Path d="M62.2009 37.7793V103.71" stroke="#0300A3" strokeWidth={2} strokeMiterlimit={10} strokeLinecap="round" />
       <Path
         d="M80.3303 76.9446C80.3303 76.9446 80.3723 76.869 80.3975 76.827C83.2958 76.7346 86.1941 78.3056 87.6979 80.7839C89.2017 83.2622 89.2521 86.5553 87.8323 89.084C87.7567 89.042 87.6643 89 87.5803 88.9496C85.7489 84.7155 83.7495 80.1958 80.3303 76.9362V76.9446Z"
         fill="#0300A3"

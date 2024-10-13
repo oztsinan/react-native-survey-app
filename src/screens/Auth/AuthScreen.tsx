@@ -27,16 +27,8 @@ export const AuthScreen = () => {
   });
 
   return (
-    <KeyboardAwareScrollView
-      contentContainerClassName="flex-1 justify-end"
-      bounces={false}
-    >
-      <Image
-        style={styles.image}
-        source={Assets.images.background}
-        contentFit="cover"
-        transition={500}
-      />
+    <KeyboardAwareScrollView contentContainerClassName="flex-1 justify-end" bounces={false}>
+      <Image style={styles.image} source={Assets.images.background} contentFit="cover" transition={500} />
 
       <BlurViewContainer>
         <TabView

@@ -14,28 +14,10 @@ type DatePickerFieldProps = {
   onChange: (value: string) => void;
 };
 
-export const DatePickerField = forwardRef<
-  HTMLInputElement,
-  DatePickerFieldProps
->(
-  (
-    {
-      value,
-      className,
-      error,
-      mode,
-      maximumDate,
-      minimumDate,
-      onChange,
-    }: DatePickerFieldProps,
-    ref
-  ) => {
+export const DatePickerField = forwardRef<HTMLInputElement, DatePickerFieldProps>(
+  ({ value, className, error, mode, maximumDate, minimumDate, onChange }: DatePickerFieldProps, ref) => {
     return (
-      <FieldContainer
-        focused={false}
-        error={error}
-        className={cn("flex flex-row items-center", className)}
-      >
+      <FieldContainer focused={false} error={error} className={cn("flex flex-row items-center", className)}>
         <BaseDateTimePicker
           value={value ? new Date(value) : new Date()}
           mode={mode}
@@ -51,7 +33,7 @@ export const DatePickerField = forwardRef<
         />
       </FieldContainer>
     );
-  }
+  },
 );
 
 DatePickerField.displayName = "DatePickerField";

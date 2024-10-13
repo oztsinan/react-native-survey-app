@@ -1,9 +1,5 @@
 import { onQueryError } from "@/utils/query";
-import {
-  focusManager,
-  QueryClient,
-  QueryClientProvider,
-} from "@tanstack/react-query";
+import { focusManager, QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { useEffect } from "react";
 import { AppState, AppStateStatus, Platform } from "react-native";
 
@@ -31,7 +27,5 @@ export const QueryProvider = ({ children }: { children: React.ReactNode }) => {
     return () => subscription.remove();
   }, []);
 
-  return (
-    <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
-  );
+  return <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>;
 };

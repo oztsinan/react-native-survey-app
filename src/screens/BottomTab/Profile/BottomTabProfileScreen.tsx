@@ -14,18 +14,8 @@ export const BottomTabProfileScreen = () => {
   const { t } = useTranslation("ProfileModule");
 
   // eğer bir ekranda logic işlemleri yapacaksak useBottomTabProfileScreen gibi bir hook yapıp kod karmaşıklığını azaltmaya ve kod tekrarını önlemeye çalışıyorum.
-  const {
-    user,
-    onLogoutPress,
-    onPrivacyPolicyPress,
-    onTermsAndConditionsPress,
-    themeIndex,
-    setThemeIndex,
-    languageIndex,
-    setLanguageIndex,
-    onChangeLanguage,
-    onChangeTheme,
-  } = useBottomTabProfileScreen();
+  const { user, onLogoutPress, onPrivacyPolicyPress, onTermsAndConditionsPress, themeIndex, languageIndex, onChangeLanguage, onChangeTheme } =
+    useBottomTabProfileScreen();
 
   return (
     <ScrollView contentContainerClassName="p-page gap-page" contentInsetAdjustmentBehavior="automatic">

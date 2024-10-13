@@ -1,15 +1,7 @@
 import { View } from "react-native";
 import { ThemedText } from "../Themed/ThemedText";
 
-export const List = ({
-  children,
-  title,
-  renderTitle,
-}: {
-  children: React.ReactNode;
-  title?: string;
-  renderTitle?: () => React.ReactNode;
-}) => {
+export const List = ({ children, title, renderTitle }: { children: React.ReactNode; title?: string; renderTitle?: () => React.ReactNode }) => {
   const renderTitleContent = () => {
     if (title) {
       return <ThemedText className="text-gray-400 text-sm">{title}</ThemedText>;

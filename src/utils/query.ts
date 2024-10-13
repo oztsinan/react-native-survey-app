@@ -4,7 +4,7 @@ import { Notifier, NotifierComponents } from "react-native-notifier";
 export const onQueryError = (error: any) => {
   let errorMessage = "";
 
-  // error tipine göre mesajı 
+  // error tipine göre mesajı
   if (typeof error === "string") {
     errorMessage = error; // hata mesajı string ise direkt al
   } else if (error instanceof Error) {

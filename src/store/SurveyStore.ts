@@ -36,9 +36,7 @@ export const useSurveyStore = create<SurveyStore>()(
       intervalId: null, // başlangıçta interval yok
       completedDate: undefined, // başlangıçta anket tamamlanmamış
       setSurvey: async (id: string) => {
-        const survey = await queryClient.fetchQuery(
-          getSurveyByIdQueryConfig(id)
-        );
+        const survey = await queryClient.fetchQuery(getSurveyByIdQueryConfig(id));
         const remainingTime = survey?.duration || 0;
 
         set(() => ({
@@ -115,12 +113,9 @@ export const useSurveyStore = create<SurveyStore>()(
           const totalElapsedTime = survey.duration - remainingTime;
 
           // 2. önceki soruların tamamlanma sürelerinin toplamını hesapla
-          const previousCompletionTimes = Object.values(answers).reduce(
-            (total, answer) => {
-              return total + (answer.completionTime || 0);
-            },
-            0
-          );
+          const previousCompletionTimes = Object.values(answers).reduce((total, answer) => {
+            return total + (answer.completionTime || 0);
+          }, 0);
 
           // 3. mevcut sorunun 'completionTime' değerini hesapla
           const completionTime = totalElapsedTime - previousCompletionTimes;
@@ -174,8 +169,8 @@ export const useSurveyStore = create<SurveyStore>()(
         answers: state.answers, // cevapları persist et
         remainingTime: state.remainingTime, // geri sayımı persist et
       }),
-    }
-  )
+    },
+  ),
 );
 
 // persist middleware ile store'u kalıcı hale getirerek, kullanıcı uygulamadan çıktığında verilerin kaybolmasını engelliyoruz..
