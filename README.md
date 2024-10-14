@@ -1,4 +1,4 @@
-﻿# React Native Survey App - Baykar Case
+# React Native Survey App - Baykar Case
 
 ![](https://github.com/oztsinan/react-native-survey-app/blob/master/screenshot/cover.png?raw=true)
 
@@ -28,6 +28,22 @@ Bu metod, **AsyncStorage** içinde her bir anketin **survey id**'lerine göre so
 Bu sayede, kullanıcıların anket cevapları **Zustand Persist** kullanılarak cihazın yerel depolama alanında saklanmaktadır.
 
 Böylece uygulama kapansa bile anket cevapları korunur ve tekrar erişilebilir.
+
+## 💻 Projeyi Çalıştırma
+
+Projeyi yerel makinenizde çalıştırmak için aşağıdaki komutları kullanabilirsiniz:
+
+Gerekli bağımlılıkları yüklemek için:
+
+```
+yarn install
+```
+
+Geliştirme sunucusunu başlatmak için:
+
+```
+yarn start
+```
 
 ## 👨🏻‍💻 Auth View
 
